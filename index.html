@@ -71,6 +71,8 @@
       let xcenter = window.innerWidth/2;
       var activecanvas = [xcenter-xcenter/2,0,xcenter,window.innerHeight];
       var totaluiwidth = xcenter/2
+      var txt = [];
+      var oldtxt = [];
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -81,15 +83,25 @@
       let h = height/20;
       let ct = 0
       var renderheight = 2*height/18;
+      var actnumber = 0
       while (ct < 6){
         let i = 27;
         while (i >= -17){
           ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+          if (txt[actnumber]){
+            ctx.fillText(txt[0], xcenter-totaluiwidth/(2*27)*i,h);
+          }
+
           i -= 11
+          actnumber += 1;
         }
         h = h + 2*height/18;
         ct += 1;
       }
+      
+      ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
+      ctx.font = '70px Arial';
+      //ctx.fillText(txt[0], 100, 100);
 
       function degToRad(degrees) {
         return degrees * Math.PI / 180;
@@ -97,27 +109,74 @@
 
       ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.strokeStyle = 'rgb('+200+', '+100+', '+0+')'
-      ctx.fillText('Skparab1 Software', 0, 10);
+      //ctx.fillText('Skparab1 Software', 0, 10);
       //ctx.strokeText('Skparab1 Software', 0, 10);
       ctx.font = '35px Arial';
       //ctx.fillText('Free and open source software for everyone', 175, 425-j);
       //ctx.strokeText('Free and open source software for everyone', 175, 425-j);
+      window.addEventListener("keydown", function(event) {
 
+        if (event.defaultPrevented) {
+          return;
+        }
+        
+        let actkey = event.code.replace('Key','')
+        
+        if (actkey != 'Backspace'){
+          txt.push(actkey);
+        } else {
+          txt.pop();
+        }
+        console.log(txt);
+
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'rgb(0,0,0)';
+        let txtsizer = (width/1024)*35;
+        let scalefactor = width/1024;
+        ctx.font = txtsizer+'px Arial';
+
+        let h = height/20;
+        let ct = 0
+        var renderheight = 2*height/18;
+        var actnumber = 0
+        //ctx.strokeRect(0,0,width,height);
+        ctx.fillStyle = 'rgb(255,255,255)';
+        while (ct < 6){
+          let i = 27;
+          while (i >= -17){
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+            if (txt[actnumber]){
+              ctx.fillText(txt[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+33*scalefactor);
+            }
+
+            i -= 11
+            actnumber += 1;
+          }
+          h = h + 2*height/18;
+          ct += 1;
+        }
+
+        //event.preventDefault();
+        }, true);
+
+      oldtxt = txt;
 
     </script>
 
     <script type="text/javascript">
+
       function getMousePosition(canvas, event) {
           let rect = canvas.getBoundingClientRect();
           let x = event.clientX - rect.left;
           let y = event.clientY - rect.top;
           console.log("Coordinate x: " + x, 
                       "Coordinate y: " + y);
+          // these are clickables
           if (x >= 110 && x <= 340 && y >= 180 && y <= 240){
-            window.open('https://skparab1.github.io/login/auth=false&pwdchallenge=true&goto=skparab1.github.io&s&homepage',"_self")
+            //window.open('https://skparab1.github.io/login/auth=false&pwdchallenge=true&goto=skparab1.github.io&s&homepage',"_self")
           }
           if (x >= 388 && x <= 612 && y >= 180 && y <= 240){
-            window.open('https://skparab1.github.io/search/&software=false&article=false',"_self")
+            //window.open('https://skparab1.github.io/search/&software=false&article=false',"_self")
           }
           // if (x >= 110 && x <= 340 && y >= 180 && y <= 240){
           //   window.open('https://skparab1.github.io/login/auth=false&pwdchallenge=true&goto=skparab1.github.io&s&homepage',"_self")
