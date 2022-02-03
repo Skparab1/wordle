@@ -121,9 +121,12 @@
         }
         
         let actkey = event.code.replace('Key','')
+        let filterletters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
         
         if (actkey != 'Backspace'){
-          txt.push(actkey);
+          if (filterletters.includes(actkey)){
+            txt.push(actkey);
+          }
         } else {
           txt.pop();
         }
