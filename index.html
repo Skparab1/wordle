@@ -75,9 +75,21 @@
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
       ctx.fillStyle = 'rgb(125,125,125)';
-      ctx.fillRect(activecanvas[0], activecanvas[1], activecanvas[2], activecanvas[3]);
-      ctx.fillStyle = 'rgb(0,0,0)';
-      ctx.fillRect(xcenter-totaluiwidth/2,height/5,33,33);
+      //ctx.fillRect(activecanvas[0], activecanvas[1], activecanvas[2], activecanvas[3]);
+      ctx.strokeStyle = 'rgb(255,255,255)';
+
+      let h = height/20;
+      let ct = 0
+      var renderheight = 2*height/18;
+      while (ct < 6){
+        let i = 27;
+        while (i >= -17){
+          ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+          i -= 11
+        }
+        h = h + 2*height/18;
+        ct += 1;
+      }
 
       function degToRad(degrees) {
         return degrees * Math.PI / 180;
