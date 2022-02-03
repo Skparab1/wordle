@@ -74,6 +74,7 @@
       var txt = [];
       var oldtxt = [];
       var lkey = '';
+      var checked = true;
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -117,11 +118,7 @@
 
       ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.strokeStyle = 'rgb('+200+', '+100+', '+0+')'
-      //ctx.fillText('Skparab1 Software', 0, 10);
-      //ctx.strokeText('Skparab1 Software', 0, 10);
       ctx.font = '35px Arial';
-      //ctx.fillText('Free and open source software for everyone', 175, 425-j);
-      //ctx.strokeText('Free and open source software for everyone', 175, 425-j);
       window.addEventListener("keydown", function(event) {
 
         if (event.defaultPrevented) {
@@ -130,6 +127,10 @@
         
         let actkey = event.code.replace('Key','')
         let filterletters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+
+        if (txt.length % 5 == 0){
+          checked = false;
+        }
         
         if (actkey != 'Backspace'){
           if (filterletters.includes(actkey)){
@@ -185,9 +186,20 @@
           ct += 1;
         }
 
+        if (txt.length % 5 == 0){
+          ctx.fillStyle = 'rgb(200,200,200)';
+          ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,(h/10+2*height/18*(txt.length/5-1)),100*(width/1024),50*(width/1024));
+        } else {
+          ctx.fillStyle = 'rgb(0,0,0)';
+          ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,h,100*(width/1024),50*(width/1024));
+        }
+
         //event.preventDefault();
         }, true);
 
+      while (txt.includes('')){
+        txt.pop('');
+      }
       oldtxt = txt;
 
     </script>
