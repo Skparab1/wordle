@@ -75,6 +75,7 @@
       var oldtxt = [];
       var lkey = '';
       var checked = true;
+      var next = false;
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -128,15 +129,24 @@
         let actkey = event.code.replace('Key','')
         let filterletters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
 
-        if (txt.length % 5 == 0){
+        if (txt.length % 5 == 0 && txt.length != 0){
           checked = false;
+        }
+
+        if (actkey == 'Enter'){
+          next = true;
+        }
+
+        if (next){
+          checked = true;
         }
         
         if (actkey != 'Backspace'){
-          if (filterletters.includes(actkey)){
+          if (filterletters.includes(actkey) && checked){
             txt.push(actkey);
             console.log('pushed',actkey);
             lkey = actkey;
+            next = false;
           }
         } else {
           var erasev = txt.length;
