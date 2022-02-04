@@ -88,7 +88,7 @@
       var colors4 = ['b','b','b','b','b','b'];
       var colors5 = ['b','b','b','b','b','b'];
       var colors6 = ['b','b','b','b','b','b'];
-      var solution = 'PLANE';
+      var solution = 'CARS';
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -196,12 +196,17 @@
             if (currentline == 6){
               colors6 = checkmatch(line6,solution);
             }
+            ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
+            ctx.fillText('Too short', 100, 100);
           currentline += 1;
+          } else {
+            ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+            ctx.fillText('Too short', 100, 100);
           }
           //ctx.fillText(colors1, 100, 100);
         } else {
-          ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
-          ctx.fillText('Too short', 100, 100);
+          //ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+          //ctx.fillText('Too short', 100, 100);
         }
 
         if ((currentline == 1 && truelength(line1) < 5) || (currentline == 2 && truelength(line2) < 5) || (currentline == 3 && truelength(line3) < 5) || (currentline == 4 && truelength(line4) < 5) || (currentline == 5 && truelength(line5) < 5) || (currentline == 6 && truelength(line6) < 6)){
@@ -306,14 +311,20 @@
               ctx.strokeStyle = 'rgb(255,255,255)';
               ctx.fillStyle = 'rgb(0,0,0)';
             }
+
+            if (colors1 == ['match','match','match','match','match'] || colors2 == ['match','match','match','match','match'] || colors3 == ['match','match','match','match','match'] || colors4 == ['match','match','match','match','match'] || colors5 == ['match','match','match','match','match'] || colors6 == ['match','match','match','match','match']){
+              ctx.fillStyle = 'rgb(255,255,255)';
+              ctx.fillText('YOU GOT IT!', 300, 100);
+              cnsole.log('you got it');
+            }
             
             indexnum += 1;
             if (colors1[indexnum] != 'b' && currentline == ct+2){
               //ctx.delay(100);
               ctx.strokeStyle = ctx.fillStyle;
               //ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h+2*(currentline-1)*height/18,50*(width/1024),50*(width/1024));
-              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+2,h+45*(width/1024),50*(width/1024)-4,7*(width/1024));
-            } else {
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));            } else {
               ctx.strokeStyle = 'rgb(0,0,0)';
               //ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+2,h+45*(width/1024),50*(width/1024)-4,7*(width/1024));
             }
