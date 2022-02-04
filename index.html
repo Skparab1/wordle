@@ -88,7 +88,7 @@
       var colors4 = ['b','b','b','b','b','b'];
       var colors5 = ['b','b','b','b','b','b'];
       var colors6 = ['b','b','b','b','b','b'];
-      var solution = 'APPLE';
+      var solution = 'MANAV';
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -308,7 +308,7 @@
             }
             
             indexnum += 1;
-            if (colors1[indexnum] != 'b'){
+            if (colors1[indexnum] != 'b' && currentline == ct+2){
               //ctx.delay(100);
               ctx.strokeStyle = ctx.fillStyle;
               //ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h+2*(currentline-1)*height/18,50*(width/1024),50*(width/1024));
@@ -320,26 +320,34 @@
             ctx.fillStyle = 'rgb(255,255,255)';
             ctx.strokeStyle = 'rgb(255,255,255)';
             console.log('written');
-            if (currentline == 1 && line1[actnumber] || forcewrite){
+
+            if (currentline != ct + 1 && indexnum == 5){
+              //break;
+            }
+            if (currentline == 1 && line1[actnumber]){
               ctx.fillText(line1[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+33*scalefactor);
             }
             console.log(currentline,line2);
             if (currentline == 2 && line2[actnumber] != undefined){
               ctx.fillStyle = 'rgb(255,255,255)';
-              //console.log('wrote line2');
+              console.log(line2[actnumber]);
               ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+3*33*scalefactor);
             }
             if (currentline == 3 && line3[actnumber] != undefined){
               ctx.fillText(line3[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+5*33*scalefactor);
+              console.log(line3[actnumber]);
             }
             if (currentline == 4 && line4[actnumber] != undefined){
               ctx.fillText(line4[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+6.75*33*scalefactor);
+              console.log(line4[actnumber]);
             }
             if (currentline == 5 && line5[actnumber] != undefined){
               ctx.fillText(line5[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+8.5*33*scalefactor);
+              console.log(line5[actnumber]);
             }
             if (currentline == 6 && line6[actnumber] != undefined){
               ctx.fillText(line6[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+10*33*scalefactor);
+              console.log(line6[actnumber]);
             }
             if (actnumber == erasev){
               ctx.font = line1sizer+'px Arial';
