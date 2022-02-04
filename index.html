@@ -83,7 +83,12 @@
       var line5 = [];
       var line6 = [];
       var colors1 = ['b','b','b','b','b','b'];
-
+      var colors2 = ['b','b','b','b','b','b'];
+      var colors3 = ['b','b','b','b','b','b'];
+      var colors4 = ['b','b','b','b','b','b'];
+      var colors5 = ['b','b','b','b','b','b'];
+      var colors6 = ['b','b','b','b','b','b'];
+      var solution = 'APPLE';
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -173,13 +178,30 @@
 
         if (actkey == 'Enter'){
           if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 6)){
-            currentline += 1;
-            colors1 = checkmatch(line1,'APPLE');
-            ctx.fillText(colors1, 100, 100);
-          } else {
-            ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
-            ctx.fillText('Too short', 100, 100);
+            if (currentline == 1){
+              colors1 = checkmatch(line1,solution);
+            }
+            if (currentline == 2){
+              colors2 = checkmatch(line2,solution);
+            }
+            if (currentline == 3){
+              colors3 = checkmatch(line3,solution);
+            }
+            if (currentline == 4){
+              colors4 = checkmatch(line4,solution);
+            }
+            if (currentline == 5){
+              colors5 = checkmatch(line5,solution);
+            }
+            if (currentline == 6){
+              colors6 = checkmatch(line6,solution);
+            }
+          currentline += 1;
           }
+          //ctx.fillText(colors1, 100, 100);
+        } else {
+          ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+          ctx.fillText('Too short', 100, 100);
         }
 
         if ((currentline == 1 && truelength(line1) < 5) || (currentline == 2 && truelength(line2) < 5) || (currentline == 3 && truelength(line3) < 5) || (currentline == 4 && truelength(line4) < 5) || (currentline == 5 && truelength(line5) < 5) || (currentline == 6 && truelength(line6) < 6)){
@@ -265,33 +287,35 @@
           let i = 27;
           let indexnum = 0;
           while (i >= -17){
-            if (colors1[indexnum] == 'b'){
+            if ((colors1[indexnum] == 'b' && ct == 0) || (colors2[indexnum] == 'b' && ct == 1) || (colors3[indexnum] == 'b' && ct == 2) || (colors4[indexnum] == 'b' && ct == 3) || (colors5[indexnum] == 'b' && ct == 4) || (colors6[indexnum] == 'b' && ct == 5)){
               ctx.strokeStyle = 'rgb(255,255,255)';
               ctx.fillStyle = 'rgb(0,0,0)';
-            } else if (colors1[indexnum] == 'match' && ct == 0){
-              ctx.strokeStyle = 'rgb(0,0,0)';
+            } else if ((colors1[indexnum] == 'match' && ct == 0) || (colors2[indexnum] == 'match' && ct == 1) || (colors3[indexnum] == 'match' && ct == 2) || (colors4[indexnum] == 'match' && ct == 3) || (colors5[indexnum] == 'match' && ct == 4) || (colors6[indexnum] == 'match' && ct == 5)){
+              ctx.strokeStyle = 'rgb(0,200,0)';
               ctx.fillStyle = 'rgb(0,200,0)';
               forcewrite = true;
-            } else if (colors1[indexnum] == 'includes' && ct == 0){
-              ctx.strokeStyle = 'rgb(0,0,0)';
+            } else if ((colors1[indexnum] == 'includes' && ct == 0) || (colors2[indexnum] == 'includes' && ct == 1) || (colors3[indexnum] == 'includes' && ct == 2) || (colors4[indexnum] == 'includes' && ct == 3) || (colors5[indexnum] == 'includes' && ct == 4) || (colors6[indexnum] == 'includes' && ct == 5)){
+              ctx.strokeStyle = 'rgb(200,200,0)';
               ctx.fillStyle = 'rgb(200,200,0)';
               forcewrite = true;
-            } else if (colors1[indexnum] == 'false' && ct == 0){
-              ctx.strokeStyle = 'rgb(0,0,0)';
+            } else if ((colors1[indexnum] == 'false' && ct == 0) || (colors2[indexnum] == 'false' && ct == 1) || (colors3[indexnum] == 'false' && ct == 2) || (colors4[indexnum] == 'false' && ct == 3) || (colors5[indexnum] == 'false' && ct == 4) || (colors6[indexnum] == 'false' && ct == 5)){
+              ctx.strokeStyle = 'rgb(200,0,0)';
               ctx.fillStyle = 'rgb(200,0,0)';
               forcewrite = true;
             } else {
               ctx.strokeStyle = 'rgb(255,255,255)';
               ctx.fillStyle = 'rgb(0,0,0)';
             }
+            
             indexnum += 1;
             if (colors1[indexnum] != 'b'){
               //ctx.delay(100);
-              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024)); 
-              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+              ctx.strokeStyle = ctx.fillStyle;
+              //ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h+2*(currentline-1)*height/18,50*(width/1024),50*(width/1024));
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+2,h+45*(width/1024),50*(width/1024)-4,7*(width/1024));
             } else {
-              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
-              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+              ctx.strokeStyle = 'rgb(0,0,0)';
+              //ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+2,h+45*(width/1024),50*(width/1024)-4,7*(width/1024));
             }
             ctx.fillStyle = 'rgb(255,255,255)';
             ctx.strokeStyle = 'rgb(255,255,255)';
@@ -299,19 +323,22 @@
             if (currentline == 1 && line1[actnumber] || forcewrite){
               ctx.fillText(line1[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+33*scalefactor);
             }
-            if (currentline == 2 && line2[actnumber]){
+            console.log(currentline,line2);
+            if (currentline == 2 && line2[actnumber] != undefined){
+              ctx.fillStyle = 'rgb(255,255,255)';
+              //console.log('wrote line2');
               ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+3*33*scalefactor);
             }
-            if (currentline == 3 && line3[actnumber]){
+            if (currentline == 3 && line3[actnumber] != undefined){
               ctx.fillText(line3[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+5*33*scalefactor);
             }
-            if (currentline == 4 && line4[actnumber]){
+            if (currentline == 4 && line4[actnumber] != undefined){
               ctx.fillText(line4[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+6.75*33*scalefactor);
             }
-            if (currentline == 5 && line5[actnumber]){
+            if (currentline == 5 && line5[actnumber] != undefined){
               ctx.fillText(line5[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+8.5*33*scalefactor);
             }
-            if (currentline == 6 && line6[actnumber]){
+            if (currentline == 6 && line6[actnumber] != undefined){
               ctx.fillText(line6[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+10*33*scalefactor);
             }
             if (actnumber == erasev){
