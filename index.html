@@ -71,11 +71,19 @@
       let xcenter = window.innerWidth/2;
       var activecanvas = [xcenter-xcenter/2,0,xcenter,window.innerHeight];
       var totaluiwidth = xcenter/2
-      var txt = [];
-      var oldtxt = [];
+      var oldline1 = [];
       var lkey = '';
       var checked = true;
       var next = false;
+      var currentline = 1;
+      var line1 = [];
+      var line2 = [];
+      var line3 = [];
+      var line4 = [];
+      var line5 = [];
+      var line6 = [];
+      var colors1 = ['b','b','b','b','b','b'];
+
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -91,8 +99,8 @@
         let i = 27;
         while (i >= -17){
           ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
-          if (txt[actnumber]){
-            ctx.fillText(txt[0], xcenter-totaluiwidth/(2*27)*i,h);
+          if (line1[actnumber]){
+            ctx.fillText(line1[0], xcenter-totaluiwidth/(2*27)*i,h);
           }
           //console.log(actnumber,erasev);
           // if (actnumber == erasev){
@@ -111,11 +119,43 @@
       
       ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.font = '70px Arial';
-      //ctx.fillText(txt[0], 100, 100);
+      //ctx.fillText(line1[0], 100, 100);
 
       function degToRad(degrees) {
         return degrees * Math.PI / 180;
       };
+
+      function truelength(lst){
+        let i = 0;
+        let count = 0;
+        while (i < lst.length){
+          if (lst[i] != ''){
+            count += 1;
+          }
+          i += 1;
+        }
+
+        return count
+      }
+
+      function checkmatch(lst,word){
+        returnlist = []
+        let i = 0;
+        console.log(lst,word);
+        while (i < 5){
+          let subject = lst[i];
+          console.log(subject,lst[i]);
+          if (word.includes(subject) && subject == word.substring(i,i+1)){
+            returnlist.push('match')
+          } else if (word.includes(subject)){
+            returnlist.push('includes')
+          } else {
+            returnlist.push('false')
+          }
+          i +=1 ;
+        }
+        return returnlist
+      }
 
       ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.strokeStyle = 'rgb('+200+', '+100+', '+0+')'
@@ -125,92 +165,185 @@
         if (event.defaultPrevented) {
           return;
         }
+
+        const ctx = canvas.getContext('2d');
         
         let actkey = event.code.replace('Key','')
         let filterletters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
 
-        if (txt.length % 5 == 0 && txt.length != 0){
+        if (actkey == 'Enter'){
+          if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 6)){
+            currentline += 1;
+            colors1 = checkmatch(line1,'APPLE');
+            ctx.fillText(colors1, 100, 100);
+          } else {
+            ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+            ctx.fillText('Too short', 100, 100);
+          }
+        }
+
+        if ((currentline == 1 && truelength(line1) < 5) || (currentline == 2 && truelength(line2) < 5) || (currentline == 3 && truelength(line3) < 5) || (currentline == 4 && truelength(line4) < 5) || (currentline == 5 && truelength(line5) < 5) || (currentline == 6 && truelength(line6) < 6)){
+          checked = true;
+        } else {
           checked = false;
         }
 
-        if (actkey == 'Enter'){
-          next = true;
-        }
-
-        if (next){
-          checked = true;
-        }
+        console.log(currentline, checked);
         
         if (actkey != 'Backspace'){
           if (filterletters.includes(actkey) && checked){
-            txt.push(actkey);
+            if (currentline == 1){
+              line1.push(actkey);
+            }
+            if (currentline == 2){
+              line2.push(actkey);
+            }
+            if (currentline == 3){
+              line3.push(actkey);
+            }
+            if (currentline == 4){
+              line4.push(actkey);
+            }
+            if (currentline == 5){
+              line5.push(actkey);
+            }
+            if (currentline == 6){
+              line6.push(actkey);
+            }
             console.log('pushed',actkey);
             lkey = actkey;
             next = false;
           }
         } else {
-          var erasev = txt.length;
-          txt.pop('Backspace');
+          var erasev;
+          //line1.pop('Backspace');
           var eraseltr = lkey;
-          txt[txt.length-1] = '';
+          if (currentline == 1){
+            line1.pop(line1.length-1);
+            erasev = line1.length;
+          }           
+          if (currentline == 2){
+            line2.pop(line2.length-1);
+            erasev = line2.length;
+          }
+          if (currentline == 3){
+            line3.pop(line3.length-1);
+            erasev = line3.length;
+          }
+          if (currentline == 4){
+            line4.pop(line4.length-1);
+            erasev = line4.length;
+          }
+          if (currentline == 5){
+            line5.pop(line5.length-1);
+            erasev = line5.length;
+          }
+          if (currentline == 6){
+            line6.pop(line6.length-1);
+            erasev = line6.length;
+          }
+
           console.log('backspaced, print',eraseltr)
           //event.preventDefault();
         }
-        console.log('txt:',txt);
+        console.log('line2:',line2);
 
-        const ctx = canvas.getContext('2d');
         ctx.fillStyle = 'rgb(0,0,0)';
-        let txtsizer = (width/1024)*35;
+        let line1sizer = (width/1024)*35;
         let scalefactor = width/1024;
-        ctx.font = txtsizer+'px Arial';
+        ctx.font = line1sizer+'px Arial';
 
         let h = height/20;
         let ct = 0
         var renderheight = 2*height/18;
         var actnumber = 0
+        var forcewrite = false;
         //ctx.strokeRect(0,0,width,height);
         ctx.fillStyle = 'rgb(255,255,255)';
-        //ctx.fillText(txt, 100,100);
+        //ctx.fillText(line1, 100,100);
         while (ct < 6){
-          console.log('in');
           let i = 27;
+          let indexnum = 0;
           while (i >= -17){
-            ctx.strokeStyle = 'rgb(255,255,255)';
-            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
-            if (txt[actnumber]){
-              ctx.fillText(txt[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+33*scalefactor);
+            if (colors1[indexnum] == 'b'){
+              ctx.strokeStyle = 'rgb(255,255,255)';
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } else if (colors1[indexnum] == 'match' && ct == 0){
+              ctx.strokeStyle = 'rgb(0,0,0)';
+              ctx.fillStyle = 'rgb(0,200,0)';
+              forcewrite = true;
+            } else if (colors1[indexnum] == 'includes' && ct == 0){
+              ctx.strokeStyle = 'rgb(0,0,0)';
+              ctx.fillStyle = 'rgb(200,200,0)';
+              forcewrite = true;
+            } else if (colors1[indexnum] == 'false' && ct == 0){
+              ctx.strokeStyle = 'rgb(0,0,0)';
+              ctx.fillStyle = 'rgb(200,0,0)';
+              forcewrite = true;
+            } else {
+              ctx.strokeStyle = 'rgb(255,255,255)';
+              ctx.fillStyle = 'rgb(0,0,0)';
             }
-            console.log(actnumber,erasev);
-            if (actnumber == erasev-1){
-              ctx.font = txtsizer+'px Arial';
+            indexnum += 1;
+            if (colors1[indexnum] != 'b'){
+              //ctx.delay(100);
+              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024)); 
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+            } else {
+              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+            }
+            ctx.fillStyle = 'rgb(255,255,255)';
+            ctx.strokeStyle = 'rgb(255,255,255)';
+            console.log('written');
+            if (currentline == 1 && line1[actnumber] || forcewrite){
+              ctx.fillText(line1[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+33*scalefactor);
+            }
+            if (currentline == 2 && line2[actnumber]){
+              ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+3*33*scalefactor);
+            }
+            if (currentline == 3 && line3[actnumber]){
+              ctx.fillText(line3[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+5*33*scalefactor);
+            }
+            if (currentline == 4 && line4[actnumber]){
+              ctx.fillText(line4[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+6.75*33*scalefactor);
+            }
+            if (currentline == 5 && line5[actnumber]){
+              ctx.fillText(line5[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+8.5*33*scalefactor);
+            }
+            if (currentline == 6 && line6[actnumber]){
+              ctx.fillText(line6[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+10*33*scalefactor);
+            }
+            if (actnumber == erasev){
+              ctx.font = line1sizer+'px Arial';
               console.log('erased');
               ctx.fillStyle = 'rgb(0,0,0)';
-              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+2*(currentline-1)*height/18,50*(width/1024),50*(width/1024));
               ctx.fillStyle = 'rgb(255,255,255)';
             }
-
             i -= 11
             actnumber += 1;
           }
+          forcewrite = false;
           h = h + 2*height/18;
           ct += 1;
         }
 
-        if (txt.length % 5 == 0){
+        if (line1.length % 5 == 0){
           ctx.fillStyle = 'rgb(200,200,200)';
-          ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,(h/10+2*height/18*(txt.length/5-1)),100*(width/1024),50*(width/1024));
+          //ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,(h/10+2*height/18*(line1.length/5-1)),100*(width/1024),50*(width/1024));
         } else {
           ctx.fillStyle = 'rgb(0,0,0)';
-          ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,h,100*(width/1024),50*(width/1024));
+          //ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,h,100*(width/1024),50*(width/1024));
         }
 
         //event.preventDefault();
         }, true);
 
-      while (txt.includes('')){
-        txt.pop('');
+      while (line1.includes('')){
+        line1.pop('');
       }
-      oldtxt = txt;
+      oldline1 = line1;
 
     </script>
 
