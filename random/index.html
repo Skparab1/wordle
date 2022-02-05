@@ -48,9 +48,9 @@
   </head>
   <body>
     <ul>
-      <li><a href="https://skparab1.github.io/images">Home</a></li>
-      <li><a href="https://skparab1.github.io/images/gallery">Daily</a></li>
-      <li><a href="https://skparab1.github.io/images/about">New</a></li>
+      <li><a href="https://skparab1.github.io/wordle">Home</a></li>
+      <li><a href="https://skparab1.github.io/wordle/random">Random</a></li>
+      <li><a href="https://skparab1.github.io/wordle/daily">Daily</a></li>
     </ul> 
 
     <h1>Skparab1 Wordle</h1>
@@ -88,8 +88,9 @@
       var colors4 = ['b','b','b','b','b','b'];
       var colors5 = ['b','b','b','b','b','b'];
       var colors6 = ['b','b','b','b','b','b'];
-      var possiblesolutions = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT']
-      var solution = possiblesolutions[Math.floor(Math.random()*10)];
+      var filterwordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU','HELLO','MAGIC','HUMAN','PIANO','ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BEACH', 'BLOCK', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'CHAIN', 'CHAIR', 'CHIEF', 'CHILD', 'CLOCK', 'COACH', 'COAST', 'COURT', 'CRIME', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEPTH', 'DOUBT', 'DRAMA', 'DREAM', 'DRESS', 'DRIVE', 'EARTH', 'EVENT', 'FAULT', 'FIELD', 'FLOOR', 'FRUIT', 'GLASS', 'GRASS', 'GREEN', 'HEART', 'HORSE', 'HOTEL', 'HOUSE', 'JUDGE', 'LEVEL', 'LIGHT', 'LUNCH', 'MATCH', 'METAL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NORTH', 'PANEL', 'PAPER', 'PHONE', 'PILOT', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'QUEEN', 'RADIO', 'RANGE', 'RIVER', 'SCENE', 'SCORE', 'SHAPE', 'SHARE', 'SHEEP', 'SLEEP', 'SMILE', 'SMOKE', 'SPACE', 'SPORT', 'START', 'STATE', 'STEEL', 'STONE', 'SUGAR', 'TOWER', 'TRACK', 'TRAIN', 'TRIAL', 'VALUE', 'VIDEO', 'WATER', 'WHITE', 'WORLD'];
+      var wordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU', 'HAVOC', 'HELLO', 'MAGIC', 'HUMAN', 'PIANO', 'ABUSE', 'ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BASIS', 'BEACH', 'BIRTH', 'BLOCK', 'BLOOD', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'BUYER', 'CAUSE', 'CHAIN', 'CHAIR', 'CHEST', 'CHIEF', 'CHILD', 'CHINA', 'CLAIM', 'CLASS', 'CLOCK', 'COACH', 'COAST', 'COURT', 'COVER', 'CREAM', 'CRIME', 'CROSS', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEATH', 'DEPTH', 'DOUBT', 'DRAFT', 'DRAMA', 'DREAM', 'DRESS', 'DRINK', 'DRIVE', 'EARTH', 'ENEMY', 'ENTRY', 'ERROR', 'EVENT', 'FAITH', 'FAULT', 'FIELD', 'FIGHT', 'FINAL', 'FLOOR', 'FOCUS', 'FORCE', 'FRAME', 'FRANK', 'FRONT', 'FRUIT', 'GLASS', 'GRANT', 'GRASS', 'GREEN', 'GROUP', 'GUIDE', 'HEART', 'HENRY', 'HORSE', 'HOTEL', 'HOUSE', 'IMAGE', 'INDEX', 'INPUT', 'ISSUE', 'JAPAN', 'JONES', 'JUDGE', 'KNIFE', 'LAURA', 'LAYER', 'LEVEL', 'LEWIS', 'LIGHT', 'LIMIT', 'LUNCH', 'MAJOR', 'MARCH', 'MATCH', 'METAL', 'MODEL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NOISE', 'NORTH', 'NOVEL', 'NURSE', 'OFFER', 'ORDER', 'OTHER', 'OWNER', 'PANEL', 'PAPER', 'PARTY', 'PEACE', 'PETER', 'PHASE', 'PHONE', 'PIECE', 'PILOT', 'PITCH', 'PLACE', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'POUND', 'POWER', 'PRESS', 'PRICE', 'PRIDE', 'PRIZE', 'PROOF', 'QUEEN', 'RADIO', 'RANGE', 'RATIO', 'REPLY', 'RIGHT', 'RIVER', 'ROUND', 'ROUTE', 'RUGBY', 'SCALE', 'SCENE', 'SCOPE', 'SCORE', 'SENSE', 'SHAPE', 'SHARE', 'SHEEP', 'SHEET', 'SHIFT', 'SHIRT', 'SHOCK', 'SIGHT', 'SIMON', 'SKILL', 'SLEEP', 'SMILE', 'SMITH', 'SMOKE', 'SOUND', 'SOUTH', 'SPACE', 'SPEED', 'SPITE', 'SPORT', 'SQUAD', 'STAFF', 'STAGE', 'START', 'STATE', 'STEAM', 'STEEL', 'STOCK', 'STONE', 'STORE', 'STUDY', 'STUFF', 'STYLE', 'SUGAR', 'TABLE', 'TASTE', 'TERRY', 'THEME', 'THING', 'TITLE', 'TOTAL', 'TOUCH', 'TOWER', 'TRACK', 'TRADE', 'TRAIN', 'TREND', 'TRIAL', 'TRUST', 'TRUTH', 'UNCLE', 'UNION', 'UNITY', 'VALUE', 'VIDEO', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WATER', 'WHILE', 'WHITE', 'WHOLE', 'WOMAN', 'WORLD', 'YOUTH', '', '5LETTERPRONOUNS', '', 'ALCON', 'AUGHT', 'HELLA', 'ONE’S', 'OUGHT', 'THAME', 'THERE', 'THINE', 'THINE', 'WHERE', 'WHICH', 'WHOSE', 'WHOSO', 'YOURS', 'YOURS', '', '5LETTERVERBS', '', 'ADMIT', 'ADOPT', 'AGREE', 'ALLOW', 'ALTER', 'APPLY', 'ARGUE', 'ARISE', 'AVOID', 'BEGIN', 'BLAME', 'BREAK', 'BRING', 'BUILD', 'BURST', 'CARRY', 'CATCH', 'CAUSE', 'CHECK', 'CLAIM', 'CLEAN', 'CLEAR', 'CLIMB', 'CLOSE', 'COUNT', 'COVER', 'CROSS', 'DANCE', 'DOUBT', 'DRINK', 'DRIVE', 'ENJOY', 'ENTER', 'EXIST', 'FIGHT', 'FOCUS', 'FORCE', 'GUESS', 'IMPLY', 'ISSUE', 'JUDGE', 'LAUGH', 'LEARN', 'LEAVE', 'LET’S', 'LIMIT', 'MARRY', 'MATCH', 'OCCUR', 'OFFER', 'ORDER', 'PHONE', 'PLACE', 'POINT', 'PRESS', 'PROVE', 'RAISE', 'REACH', 'REFER', 'RELAX', 'SERVE', 'SHALL', 'SHARE', 'SHIFT', 'SHOOT', 'SLEEP', 'SOLVE', 'SOUND', 'SPEAK', 'SPEND', 'SPLIT', 'STAND', 'START', 'STATE', 'STICK', 'STUDY', 'TEACH', 'THANK', 'THINK', 'THROW', 'TOUCH', 'TRAIN', 'TREAT', 'TRUST', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WORRY', 'WOULD', 'WRITE', '', '5LETTERADJECTIVES', '', 'ABOVE', 'ACUTE', 'ALIVE', 'ALONE', 'ANGRY', 'AWARE', 'AWFUL', 'BASIC', 'BLACK', 'BLIND', 'BRAVE', 'BRIEF', 'BROAD', 'BROWN', 'CHEAP', 'CHIEF', 'CIVIL', 'CLEAN', 'CLEAR', 'CLOSE', 'CRAZY', 'DAILY', 'DIRTY', 'EARLY', 'EMPTY', 'EQUAL', 'EXACT', 'EXTRA', 'FAINT', 'FALSE', 'FIFTH', 'FINAL', 'FIRST', 'FRESH', 'FRONT', 'FUNNY', 'GIANT', 'GRAND', 'GREAT', 'GREEN', 'GROSS', 'HAPPY', 'HARSH', 'HEAVY', 'HUMAN', 'IDEAL', 'INNER', 'JOINT', 'LARGE', 'LEGAL', 'LEVEL', 'LIGHT', 'LOCAL', 'LOOSE', 'LUCKY', 'MAGIC', 'MAJOR', 'MINOR', 'MORAL', 'NAKED', 'NASTY', 'NAVAL', 'OTHER', 'OUTER', 'PLAIN', 'PRIME', 'PRIOR', 'PROUD', 'QUICK', 'QUIET', 'RAPID', 'READY', 'RIGHT', 'ROMAN', 'ROUGH', 'ROUND', 'ROYAL', 'RURAL', 'SHARP', 'SHEER', 'SHORT', 'SILLY', 'SIXTH', 'SMALL', 'SMART', 'SOLID', 'SORRY', 'SPARE', 'STEEP', 'STILL', 'SUPER', 'SWEET', 'THICK', 'THIRD', 'TIGHT', 'TOTAL', 'TOUGH', 'UPPER', 'UPSET', 'URBAN', 'USUAL', 'VAGUE', 'VALID', 'VITAL', 'WHITE', 'WHOLE', 'WRONG', 'YOUNG', '', '5LETTERCONJUNCTIONS', '', 'AFORE', 'AFTER', 'BOTHE', 'OTHER', 'SINCE', 'SLASH', 'UNTIL', 'WHERE', 'WHILE', '', '5LETTERADVERBS', '', 'ABACK', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ACCEL', 'ADOWN', 'AFOOT', 'AFORE', 'AFOUL', 'AFTER', 'AGAIN', 'AGAPE', 'AGOGO', 'AGONE', 'AHEAD', 'AHULL', 'ALIFE', 'ALIKE', 'ALINE', 'ALOFT', 'ALONE', 'ALONG', 'ALOOF', 'ALOUD', 'AMISS', 'AMPLY', 'AMUCK', 'APACE', 'APART', 'APTLY', 'AREAR', 'ASIDE', 'ASKEW', 'AWFUL', 'BADLY', 'BALLY', 'BELOW', 'CANNY', 'CHEAP', 'CLEAN', 'CLEAR', 'COYLY', 'DAILY', 'DIMLY', 'DIRTY', 'DITTO', 'DRILY', 'DRYLY', 'DULLY', 'EARLY', 'EXTRA', 'FALSE', 'FATLY', 'FEYLY', 'FIRST', 'FITLY', 'FORTE', 'FORTH', 'FRESH', 'FULLY', 'FUNNY', 'GAILY', 'GAYLY', 'GODLY', 'GREAT', 'HAPLY', 'HEAVY', 'HELLA', 'HENCE', 'HOTLY', 'ICILY', 'INFRA', 'INTL.', 'JILDI', 'JOLLY', 'LAXLY', 'LENTO', 'LIGHT', 'LOWLY', 'MADLY', 'MAYBE', 'NEVER', 'NEWLY', 'NOBLY', 'ODDLY', 'OFTEN', 'OTHER', 'OUGHT', 'PARTY', 'PIANO', 'PLAIN', 'PLONK', 'PLUMB', 'PRIOR', 'QUEER', 'QUICK', 'QUITE', 'RAMEN', 'RAPID', 'REDLY', 'RIGHT', 'ROUGH', 'ROUND', 'SADLY', 'SECUS', 'SELLY', 'SHARP', 'SHEER', 'SHILY', 'SHORT', 'SHYLY', 'SILLY', 'SINCE', 'SLEEK', 'SLYLY', 'SMALL', 'SO-SO', 'SOUND', 'SPANG', 'SRSLY', 'STARK', 'STILL', 'STONE', 'STOUR', 'SUPER', 'TALLY', 'TANTO', 'THERE', 'THICK', 'TIGHT', 'TODAY', 'TOMOZ', 'TRULY', 'TWICE', 'UNDER', 'UTTER', 'VERRY', 'WANLY', 'WETLY', 'WHERE', 'WRONG', 'WRYLY', '', '5LETTERPREPOSITIONS', '', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ADOWN', 'AFORE', 'AFTER', 'ALONG', 'ALOOF', 'AMONG', 'BELOW', 'CIRCA', 'CROSS', 'FURTH', 'MINUS', 'NEATH', 'ROUND', 'SINCE', 'SPITE', 'UNDER', 'UNTIL', '', '5LETTERINTERJECTIONS', '', 'AARGH', 'ADIEU', 'ADIOS', 'ALACK', 'ALOHA', 'AVAST', 'BAKAW', 'BASTA', 'BEGAD', 'BLESS', 'BLIGE', 'BRAVA', 'BRAVO', 'BRING', 'CHOOK', 'DAMME', 'DILDO', 'DITTO', 'FRICK', 'FUDGE', 'GOLLY', 'GRATZ', 'HALLO', 'HASTA', 'HAVOC', 'HELLA', 'HELLO', 'HOWAY', 'HOWDY', 'HULLO', 'HUZZA', 'JESUS', 'KAPOW', 'LOOSE', 'LORDY', 'MARRY', 'MERCY', 'NIGHT', 'PLONK', 'PSYCH', 'QUITE', 'SALVE', 'SKOAL', 'SNIFF', 'SOOEY', 'THERE', 'THIAM', 'THWAP', 'TOUGH', 'TWIRP', 'VIOLA', 'VIVAT', 'WACKO', 'WAHEY', 'WHIST', 'WILMA', 'WIRRA', 'WOOPS', 'WOWIE', 'YECCH', 'YEEHA', 'YEESH', 'YOWCH', 'ZOWIE', 'DONE'];
+      var solution = filterwordbank[Math.floor(Math.random()*10)];
 
       const ctx = canvas.getContext('2d');
       //canvas.getMousePosition
@@ -97,10 +98,11 @@
       //ctx.fillRect(activecanvas[0], activecanvas[1], activecanvas[2], activecanvas[3]);
       ctx.strokeStyle = 'rgb(255,255,255)';
 
-      let h = height/20;
+      let h = height/1000;
       let ct = 0
       var renderheight = 2*height/18;
       var actnumber = 0
+      drawkeyboard(colors1);
       while (ct < 6){
         let i = 27;
         while (i >= -17){
@@ -163,6 +165,56 @@
         return returnlist
       }
 
+      function drawkeyboard(letters){
+        const ctx = canvas.getContext('2d');
+        let scalefactor = 1024/window.innerWidth;
+        let leftwidth = 3*window.innerWidth/8;
+        let keyboardmidpt = leftwidth/2;
+        let startw = keyboardmidpt/7;
+        let keybwidth = keyboardmidpt + keyboardmidpt-startw-startw;
+        let eachsection = keybwidth/10;
+        let keywidth = eachsection*9/10;
+        let keygap = eachsection*1/10;
+        let eachheight = keybwidth/9;
+        let keyheight = eachheight*9/10;
+        let gapy = eachheight*1/10;
+        let txtsize = scalefactor*25;
+        
+        // render keyboard box 
+        // theoretically we dont need these after the keys are done
+        // was mainly just for checking sizing
+        ctx.strokeStyle = 'rgb(255,255,255)'
+        ctx.strokeRect(startw,startw,keybwidth,keybwidth/3);
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.font = txtsize+'px Arial';
+        
+        var keycount = 0;
+        keys = ['Q','W','E','R','T','Y','U','I','O','P'];
+        while (keycount < 10){
+          ctx.strokeRect(startw+eachsection*keycount,startw,keywidth,keyheight);
+          ctx.fillText(keys[keycount],startw+eachsection*keycount,startw)
+          keycount += 1
+        }
+        keycount = 0;
+        keys = ['A','S','D','F','G','H','J','K','L'];
+        while (keycount < 9){
+          ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight,keywidth,keyheight);
+          keycount += 1
+        }
+        keycount = 0;
+        keys = ['👍','Z','X','C','V','B','N','M','O','P','⏪'];
+        while (keycount < 9){
+          ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight*2,keywidth,keyheight);
+          
+          keycount += 1
+        }
+
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.font = '25px Arial';
+        ctx.fillText('Q',startw+5,startw+25);
+        ctx.font = '35px Arial';
+      }
+
       ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.strokeStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.font = '35px Arial';
@@ -179,27 +231,26 @@
 
         if (actkey == 'Enter'){
           if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 6)){
-            if (currentline == 1){
+            if (currentline == 1 ){ //&& wordbank.includes(line1[0]+line1[1]+line1[2]+line1[3]+line1[4])){
               colors1 = checkmatch(line1,solution);
-            }
-            if (currentline == 2){
+            } else if (currentline == 2 ){ //&& wordbank.includes(line2[0]+line2[1]+line2[2]+line2[3]+line2[4])){
               colors2 = checkmatch(line2,solution);
-            }
-            if (currentline == 3){
+            } else if (currentline == 3 ){ //&& wordbank.includes(line3[0]+line3[1]+line3[2]+line3[3]+line3[4])){
               colors3 = checkmatch(line3,solution);
-            }
-            if (currentline == 4){
+            } else if (currentline == 4 ){ //&& wordbank.includes(line4[0]+line4[1]+line4[2]+line4[3]+line4[4])){
               colors4 = checkmatch(line4,solution);
-            }
-            if (currentline == 5){
+            } else if (currentline == 5 ){ //&& wordbank.includes(line5[0]+line5[1]+line5[2]+line5[3]+line5[4])){
               colors5 = checkmatch(line5,solution);
-            }
-            if (currentline == 6){
+            } else if (currentline == 6 ){ //&& wordbank.includes(line6[0]+line6[1]+line6[2]+line6[3]+line6[4])){
               colors6 = checkmatch(line6,solution);
+            } else {
+              ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+              ctx.fillText('Word not in word bank, but limiting off', 100, 200);
+              currentline -= 1;
             }
             ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
             ctx.fillText('Too short', 100, 100);
-          currentline += 1;
+            currentline += 1;
           } else {
             ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
             ctx.fillText('Too short', 100, 100);
@@ -281,7 +332,7 @@
         let scalefactor = width/1024;
         ctx.font = line1sizer+'px Arial';
 
-        let h = height/20;
+        let h = height/1000;
         let ct = 0
         var renderheight = 2*height/18;
         var actnumber = 0
