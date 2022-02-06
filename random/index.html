@@ -335,7 +335,7 @@
                 console.log('got on last try');
               } else {
                 ctx.fillStyle = 'rgb(255,255,255)';
-                ctx.fillText('The word was '+solution, 500, 500);
+                ctx.fillText('The word was '+solution, 500, height*4/5);
               }
             } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
@@ -349,12 +349,12 @@
             }
             ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
-            ctx.fillText('Too short', 100, 400);
+            ctx.fillText('Too short height*3/5', 100, 400);
             currentline += 1;
           } else {
             ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
-            ctx.fillText('Too short', 100, 400);
+            ctx.fillText('Too short', 100, height*3/5);
           }
           //ctx.fillText(colors1, 100, 100);
         } else {
