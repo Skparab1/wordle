@@ -168,6 +168,7 @@
         let i = 0;
         console.log(lst,word);
         let yellowletter = [];
+
         while (i < 5){
           let letter = lst[i];
           console.log(letter,lst[i]);
@@ -177,7 +178,15 @@
             if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
             if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
           } else {
-            if (yellowletter.includes(letter) && countchar(word,letter) == 1){
+            let verifynext = false;
+            let j = i;
+            while(j < 5){
+              if (word.substring(i,i+1) == lst[j]){
+                verifynext = true;
+              }
+              j += 1;
+            }
+            if ((yellowletter.includes(letter) && countchar(word,letter) == 1 ) || (countchar(word,letter) == 1 && word.includes(letter) && verifynext)){
               returnlist.push('false');
               if (letter == 'Q'){ keyrow1[0] = 'false';} if (letter == 'W'){ keyrow1[1] = 'false'}if (letter == 'E'){ keyrow1[2] = 'false'}if (letter == 'R'){ keyrow1[3] = 'false'}if (letter == 'T'){ keyrow1[4] = 'false'}if (letter == 'Y'){ keyrow1[5] = 'false'}if (letter == 'U'){ keyrow1[6] = 'false'}if (letter == 'I'){ keyrow1[7] = 'false'}if (letter == 'O'){ keyrow1[8] = 'false'}if (letter == 'P'){ keyrow1[9] = 'false'}
               if (letter == 'A'){ keyrow2[0] = 'false';} if (letter == 'S'){ keyrow2[1] = 'false'}if (letter == 'D'){ keyrow2[2] = 'false'}if (letter == 'F'){ keyrow2[3] = 'false'}if (letter == 'G'){ keyrow2[4] = 'false'}if (letter == 'H'){ keyrow2[5] = 'false'}if (letter == 'J'){ keyrow2[6] = 'false'}if (letter == 'K'){ keyrow2[7] = 'false'}if (letter == 'L'){ keyrow2[8] = 'false'}
@@ -243,7 +252,7 @@
             ctx.fillRect(startw+eachsection*keycount,startw,keywidth,keyheight);
             ctx.fillStyle = 'rgb(255,255,255)'
           }
-          //ctx.strokeRect(startw+eachsection*keycount,startw,keywidth,keyheight);
+          ctx.strokeRect(startw+eachsection*keycount,startw,keywidth,keyheight);
           ctx.fillText(keys[keycount],startw+eachsection*keycount+2*scalefactor,startw+25*scalefactor);
           keycount += 1
         }
@@ -263,6 +272,7 @@
             ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight,keywidth,keyheight);
             ctx.fillStyle = 'rgb(255,255,255)'
           } 
+          ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight,keywidth,keyheight);
           ctx.fillText(keys[keycount],startw+eachsection*keycount+4*scalefactor+eachsection/2,startw+eachheight+25*scalefactor);
           keycount += 1
         }
@@ -282,7 +292,7 @@
             ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight*2,keywidth,keyheight);
             ctx.fillStyle = 'rgb(255,255,255)'
           } 
-          //ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight*2,keywidth,keyheight);
+          ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight*2,keywidth,keyheight);
           ctx.fillText(keys[keycount],startw+eachsection*keycount+4*scalefactor+eachsection/2,startw+2*eachheight+25*scalefactor);
           keycount += 1
         }
@@ -308,7 +318,7 @@
         let filterletters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
 
         if (actkey == 'Enter'){
-          if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 6)){
+          if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 5)){
             if (currentline == 1 ){ //&& wordbank.includes(line1[0]+line1[1]+line1[2]+line1[3]+line1[4])){
               colors1 = checkmatch(line1,solution);
             } else if (currentline == 2 ){ //&& wordbank.includes(line2[0]+line2[1]+line2[2]+line2[3]+line2[4])){
@@ -326,12 +336,14 @@
               ctx.fillText('Word not in word bank, but limiting off', 100, 200);
               currentline -= 1;
             }
+            ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
-            ctx.fillText('Too short', 100, 300);
+            ctx.fillText('Too short', 100, 400);
             currentline += 1;
           } else {
+            ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
-            ctx.fillText('Too short', 100, 300);
+            ctx.fillText('Too short', 100, 400);
           }
           //ctx.fillText(colors1, 100, 100);
         } else {
@@ -339,7 +351,7 @@
           //ctx.fillText('Too short', 100, 100);
         }
 
-        if ((currentline == 1 && truelength(line1) < 5) || (currentline == 2 && truelength(line2) < 5) || (currentline == 3 && truelength(line3) < 5) || (currentline == 4 && truelength(line4) < 5) || (currentline == 5 && truelength(line5) < 5) || (currentline == 6 && truelength(line6) < 6)){
+        if ((currentline == 1 && truelength(line1) < 5) || (currentline == 2 && truelength(line2) < 5) || (currentline == 3 && truelength(line3) < 5) || (currentline == 4 && truelength(line4) < 5) || (currentline == 5 && truelength(line5) < 5) || (currentline == 6 && truelength(line6) < 5)){
           checked = true;
         } else {
           checked = false;
@@ -413,7 +425,7 @@
         let h = height/1000;
         let ct = 0
         var renderheight = 2*height/18;
-        var actnumber = 0
+        var actnumber = 0;
         var forcewrite = false;
         //ctx.strokeRect(0,0,width,height);
         ctx.fillStyle = 'rgb(255,255,255)';
