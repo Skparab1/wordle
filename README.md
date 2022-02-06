@@ -5,4 +5,4 @@ skparab1 wordle gui
 - Colored frames
 - optimized refresh
 
-## 
+## Need to do
