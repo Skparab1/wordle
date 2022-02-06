@@ -1,5 +1,5 @@
 # wordle
-skparab1 wordle gui
+skparab1 wordle gui at https://skparab1.github.io/wordle
 
 ## Main features
 - Colored frames
