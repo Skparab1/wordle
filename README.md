@@ -8,4 +8,4 @@ skparab1 wordle gui
 
 ## Need to do
 - save word
-- - larger word bank
+- larger word bank
