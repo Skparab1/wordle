@@ -1,2 +1,2 @@
 # wordle
-skparab1 wordle
+skparab1 wordle gui
