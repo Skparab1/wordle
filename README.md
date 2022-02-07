@@ -8,4 +8,5 @@ skparab1 wordle gui at https://skparab1.github.io/wordle
 
 ## Need to do
 - save word
+- saving word works
 - larger word bank
