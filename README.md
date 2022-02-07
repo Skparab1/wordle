@@ -9,5 +9,6 @@ skparab1 wordle gui at https://skparab1.github.io/wordle
 ## Need to do
 - save word
   - saving word works
-    - word is saved
+    - word is saved if user does not solve it
+    - if user solves it 
 - larger word bank
