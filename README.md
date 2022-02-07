@@ -10,5 +10,5 @@ skparab1 wordle gui at https://skparab1.github.io/wordle
 - save word
   - saving word works
     - word is saved if user does not solve it
-    - if user solves it then word will
+    - if user solves it then word will change after reload
 - larger word bank
