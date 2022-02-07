@@ -5,7 +5,8 @@ skparab1 wordle gui at https://skparab1.github.io/wordle
 - Colored frames
 - optimized refresh
 - word bank of 600 words
-  - needs to be bigger but ok for 
+  - needs to be bigger but ok for now
+  - could be used to catch invalid words but too small for that right now
 
 ## Need to do
 - save word
