@@ -99,7 +99,7 @@
       console.log(loc);
       if (loc == 'https://skparab1.github.io/wordle/'){
         solution = 'CLOCK';
-      } else if (sltn != null){
+      } else if (sltn != null && sltn != 'solved!'){
         solution = sltn;
       } else {
         solution = filterwordbank[Math.floor(Math.random()*filterwordbank.length)];
@@ -238,7 +238,7 @@
           ctx.fillStyle = 'rgb(255,255,255)';
           ctx.fillText('YOU GOT IT!', 50, window.innerHeight*3/5);
           ctx.fillText('reload for another one', 50, window.innerHeight*4/5);
-          localStorage.setItem('solution',null);
+          localStorage.setItem('solution','solved!');
         }
         return returnlist
       }
@@ -369,7 +369,7 @@
               } else {
                 ctx.fillStyle = 'rgb(255,255,255)';
                 ctx.fillText('The word was '+solution, 500, height*4/5);
-                localStorage.setItem('solution',null);
+                localStorage.setItem('solution','solved!');
               }
             } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
