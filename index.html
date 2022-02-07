@@ -186,7 +186,7 @@
             if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
           } else {
             let verifynext = false;
-            let j = i;
+            let j = 0;
             while(j < 5){
               if (word.substring(i,i+1) == letter && letter == lst[j]){
                 verifynext = true;
