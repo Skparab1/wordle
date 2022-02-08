@@ -15,5 +15,6 @@ skparab1 wordle gui at https://skparab1.github.io/wordle
     - if user solves it then word will change after reload
   - still need to save guesses
     - working on this right now
+    - almost done
 - larger word bank
   - needs to be bigger but ok for now
