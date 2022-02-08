@@ -76,32 +76,50 @@
       var checked = true;
       var next = false;
       var currentline = 1;
+      
       var line1 = localStorage.getItem('l1');
       if (line1 == null || line1 == 'done'){
         line1 = [];
       } else {
         line1 = makelist(line1);
       }
-      //localStorage.setItem('l1',[]);
+      if (line1.length == 5 && colors1 != []){
+        currentline = 2;
+      }
 
-      //line1 = [];
-      var line2 = [];
+      var line = localStorage.getItem('l1');
+      if (line1 == null || line1 == 'done'){
+        line1 = [];
+      } else {
+        line1 = makelist(line1);
+      }
+
       var line3 = [];
       var line4 = [];
       var line5 = [];
       var line6 = [];
-      var colors1 = ['b','b','b','b','b','b'];
-      var colors2 = ['b','b','b','b','b','b'];
-      var colors3 = ['b','b','b','b','b','b'];
-      var colors4 = ['b','b','b','b','b','b'];
-      var colors5 = ['b','b','b','b','b','b'];
-      var colors6 = ['b','b','b','b','b','b'];
+
+      var colors1 = localStorage.getItem('c1');
+      console.log(colors1);
+      if (colors1 == null || colors1 == 'done'){
+        colors1 = ['b','b','b','b','b'];
+        localStorage.setItem('c1',makestring(colors1));
+      } else {
+        colors1 = makelist(colors1);
+      }
+      console.log(colors1);
+      
+      var colors2 = ['b','b','b','b','b'];
+      var colors3 = ['b','b','b','b','b'];
+      var colors4 = ['b','b','b','b','b'];
+      var colors5 = ['b','b','b','b','b'];
+      var colors6 = ['b','b','b','b','b'];
       var keyrow1 = ['','','','','','','','','',''];
       var keyrow2 = ['','','','','','','','',''];
       var keyrow3 = ['','','','','','',''];
       var sltn = localStorage.getItem('solution');
-      var filterwordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU','HELLO','MAGIC','HUMAN','PIANO','ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BEACH', 'BLOCK', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'CHAIN', 'CHAIR', 'CHIEF', 'CHILD', 'CLOCK', 'COACH', 'COAST', 'COURT', 'CRIME', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEPTH', 'DOUBT', 'DRAMA', 'DREAM', 'DRESS', 'DRIVE', 'EARTH', 'EVENT', 'FAULT', 'FIELD', 'FLOOR', 'FRUIT', 'GLASS', 'GRASS', 'GREEN', 'HEART', 'HORSE', 'HOTEL', 'HOUSE', 'JUDGE', 'LEVEL', 'LIGHT', 'LUNCH', 'MATCH', 'METAL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NORTH', 'PANEL', 'PAPER', 'PHONE', 'PILOT', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'QUEEN', 'RADIO', 'RANGE', 'RIVER', 'SCENE', 'SCORE', 'SHAPE', 'SHARE', 'SHEEP', 'SLEEP', 'SMILE', 'SMOKE', 'SPACE', 'SPORT', 'START', 'STATE', 'STEEL', 'STONE', 'SUGAR', 'TOWER', 'TRACK', 'TRAIN', 'TRIAL', 'VALUE', 'VIDEO', 'WATER', 'WHITE', 'WORLD'];
-      var wordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU', 'HAVOC', 'HELLO', 'MAGIC', 'HUMAN', 'PIANO', 'ABUSE', 'ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BASIS', 'BEACH', 'BIRTH', 'BLOCK', 'BLOOD', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'BUYER', 'CAUSE', 'CHAIN', 'CHAIR', 'CHEST', 'CHIEF', 'CHILD', 'CHINA', 'CLAIM', 'CLASS', 'CLOCK', 'COACH', 'COAST', 'COURT', 'COVER', 'CREAM', 'CRIME', 'CROSS', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEATH', 'DEPTH', 'DOUBT', 'DRAFT', 'DRAMA', 'DREAM', 'DRESS', 'DRINK', 'DRIVE', 'EARTH', 'ENEMY', 'ENTRY', 'ERROR', 'EVENT', 'FAITH', 'FAULT', 'FIELD', 'FIGHT', 'FINAL', 'FLOOR', 'FOCUS', 'FORCE', 'FRAME', 'FRANK', 'FRONT', 'FRUIT', 'GLASS', 'GRANT', 'GRASS', 'GREEN', 'GROUP', 'GUIDE', 'HEART', 'HENRY', 'HORSE', 'HOTEL', 'HOUSE', 'IMAGE', 'INDEX', 'INPUT', 'ISSUE', 'JAPAN', 'JONES', 'JUDGE', 'KNIFE', 'LAURA', 'LAYER', 'LEVEL', 'LEWIS', 'LIGHT', 'LIMIT', 'LUNCH', 'MAJOR', 'MARCH', 'MATCH', 'METAL', 'MODEL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NOISE', 'NORTH', 'NOVEL', 'NURSE', 'OFFER', 'ORDER', 'OTHER', 'OWNER', 'PANEL', 'PAPER', 'PARTY', 'PEACE', 'PETER', 'PHASE', 'PHONE', 'PIECE', 'PILOT', 'PITCH', 'PLACE', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'POUND', 'POWER', 'PRESS', 'PRICE', 'PRIDE', 'PRIZE', 'PROOF', 'QUEEN', 'RADIO', 'RANGE', 'RATIO', 'REPLY', 'RIGHT', 'RIVER', 'ROUND', 'ROUTE', 'RUGBY', 'SCALE', 'SCENE', 'SCOPE', 'SCORE', 'SENSE', 'SHAPE', 'SHARE', 'SHEEP', 'SHEET', 'SHIFT', 'SHIRT', 'SHOCK', 'SIGHT', 'SIMON', 'SKILL', 'SLEEP', 'SMILE', 'SMITH', 'SMOKE', 'SOUND', 'SOUTH', 'SPACE', 'SPEED', 'SPITE', 'SPORT', 'SQUAD', 'STAFF', 'STAGE', 'START', 'STATE', 'STEAM', 'STEEL', 'STOCK', 'STONE', 'STORE', 'STUDY', 'STUFF', 'STYLE', 'SUGAR', 'TABLE', 'TASTE', 'TERRY', 'THEME', 'THING', 'TITLE', 'TOTAL', 'TOUCH', 'TOWER', 'TRACK', 'TRADE', 'TRAIN', 'TREND', 'TRIAL', 'TRUST', 'TRUTH', 'UNCLE', 'UNION', 'UNITY', 'VALUE', 'VIDEO', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WATER', 'WHILE', 'WHITE', 'WHOLE', 'WOMAN', 'WORLD', 'YOUTH', '', '5LETTERPRONOUNS', '', 'ALCON', 'AUGHT', 'HELLA', 'ONE’S', 'OUGHT', 'THAME', 'THERE', 'THINE', 'THINE', 'WHERE', 'WHICH', 'WHOSE', 'WHOSO', 'YOURS', 'YOURS', '', '5LETTERVERBS', '', 'ADMIT', 'ADOPT', 'AGREE', 'ALLOW', 'ALTER', 'APPLY', 'ARGUE', 'ARISE', 'AVOID', 'BEGIN', 'BLAME', 'BREAK', 'BRING', 'BUILD', 'BURST', 'CARRY', 'CATCH', 'CAUSE', 'CHECK', 'CLAIM', 'CLEAN', 'CLEAR', 'CLIMB', 'CLOSE', 'COUNT', 'COVER', 'CROSS', 'DANCE', 'DOUBT', 'DRINK', 'DRIVE', 'ENJOY', 'ENTER', 'EXIST', 'FIGHT', 'FOCUS', 'FORCE', 'GUESS', 'IMPLY', 'ISSUE', 'JUDGE', 'LAUGH', 'LEARN', 'LEAVE', 'LET’S', 'LIMIT', 'MARRY', 'MATCH', 'OCCUR', 'OFFER', 'ORDER', 'PHONE', 'PLACE', 'POINT', 'PRESS', 'PROVE', 'RAISE', 'REACH', 'REFER', 'RELAX', 'SERVE', 'SHALL', 'SHARE', 'SHIFT', 'SHOOT', 'SLEEP', 'SOLVE', 'SOUND', 'SPEAK', 'SPEND', 'SPLIT', 'STAND', 'START', 'STATE', 'STICK', 'STUDY', 'TEACH', 'THANK', 'THINK', 'THROW', 'TOUCH', 'TRAIN', 'TREAT', 'TRUST', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WORRY', 'WOULD', 'WRITE', '', '5LETTERADJECTIVES', '', 'ABOVE', 'ACUTE', 'ALIVE', 'ALONE', 'ANGRY', 'AWARE', 'AWFUL', 'BASIC', 'BLACK', 'BLIND', 'BRAVE', 'BRIEF', 'BROAD', 'BROWN', 'CHEAP', 'CHIEF', 'CIVIL', 'CLEAN', 'CLEAR', 'CLOSE', 'CRAZY', 'DAILY', 'DIRTY', 'EARLY', 'EMPTY', 'EQUAL', 'EXACT', 'EXTRA', 'FAINT', 'FALSE', 'FIFTH', 'FINAL', 'FIRST', 'FRESH', 'FRONT', 'FUNNY', 'GIANT', 'GRAND', 'GREAT', 'GREEN', 'GROSS', 'HAPPY', 'HARSH', 'HEAVY', 'HUMAN', 'IDEAL', 'INNER', 'JOINT', 'LARGE', 'LEGAL', 'LEVEL', 'LIGHT', 'LOCAL', 'LOOSE', 'LUCKY', 'MAGIC', 'MAJOR', 'MINOR', 'MORAL', 'NAKED', 'NASTY', 'NAVAL', 'OTHER', 'OUTER', 'PLAIN', 'PRIME', 'PRIOR', 'PROUD', 'QUICK', 'QUIET', 'RAPID', 'READY', 'RIGHT', 'ROMAN', 'ROUGH', 'ROUND', 'ROYAL', 'RURAL', 'SHARP', 'SHEER', 'SHORT', 'SILLY', 'SIXTH', 'SMALL', 'SMART', 'SOLID', 'SORRY', 'SPARE', 'STEEP', 'STILL', 'SUPER', 'SWEET', 'THICK', 'THIRD', 'TIGHT', 'TOTAL', 'TOUGH', 'UPPER', 'UPSET', 'URBAN', 'USUAL', 'VAGUE', 'VALID', 'VITAL', 'WHITE', 'WHOLE', 'WRONG', 'YOUNG', '', '5LETTERCONJUNCTIONS', '', 'AFORE', 'AFTER', 'BOTHE', 'OTHER', 'SINCE', 'SLASH', 'UNTIL', 'WHERE', 'WHILE', '', '5LETTERADVERBS', '', 'ABACK', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ACCEL', 'ADOWN', 'AFOOT', 'AFORE', 'AFOUL', 'AFTER', 'AGAIN', 'AGAPE', 'AGOGO', 'AGONE', 'AHEAD', 'AHULL', 'ALIFE', 'ALIKE', 'ALINE', 'ALOFT', 'ALONE', 'ALONG', 'ALOOF', 'ALOUD', 'AMISS', 'AMPLY', 'AMUCK', 'APACE', 'APART', 'APTLY', 'AREAR', 'ASIDE', 'ASKEW', 'AWFUL', 'BADLY', 'BALLY', 'BELOW', 'CANNY', 'CHEAP', 'CLEAN', 'CLEAR', 'COYLY', 'DAILY', 'DIMLY', 'DIRTY', 'DITTO', 'DRILY', 'DRYLY', 'DULLY', 'EARLY', 'EXTRA', 'FALSE', 'FATLY', 'FEYLY', 'FIRST', 'FITLY', 'FORTE', 'FORTH', 'FRESH', 'FULLY', 'FUNNY', 'GAILY', 'GAYLY', 'GODLY', 'GREAT', 'HAPLY', 'HEAVY', 'HELLA', 'HENCE', 'HOTLY', 'ICILY', 'INFRA', 'INTL.', 'JILDI', 'JOLLY', 'LAXLY', 'LENTO', 'LIGHT', 'LOWLY', 'MADLY', 'MAYBE', 'NEVER', 'NEWLY', 'NOBLY', 'ODDLY', 'OFTEN', 'OTHER', 'OUGHT', 'PARTY', 'PIANO', 'PLAIN', 'PLONK', 'PLUMB', 'PRIOR', 'QUEER', 'QUICK', 'QUITE', 'RAMEN', 'RAPID', 'REDLY', 'RIGHT', 'ROUGH', 'ROUND', 'SADLY', 'SECUS', 'SELLY', 'SHARP', 'SHEER', 'SHILY', 'SHORT', 'SHYLY', 'SILLY', 'SINCE', 'SLEEK', 'SLYLY', 'SMALL', 'SO-SO', 'SOUND', 'SPANG', 'SRSLY', 'STARK', 'STILL', 'STONE', 'STOUR', 'SUPER', 'TALLY', 'TANTO', 'THERE', 'THICK', 'TIGHT', 'TODAY', 'TOMOZ', 'TRULY', 'TWICE', 'UNDER', 'UTTER', 'VERRY', 'WANLY', 'WETLY', 'WHERE', 'WRONG', 'WRYLY', '', '5LETTERPREPOSITIONS', '', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ADOWN', 'AFORE', 'AFTER', 'ALONG', 'ALOOF', 'AMONG', 'BELOW', 'CIRCA', 'CROSS', 'FURTH', 'MINUS', 'NEATH', 'ROUND', 'SINCE', 'SPITE', 'UNDER', 'UNTIL', '', '5LETTERINTERJECTIONS', '', 'AARGH', 'ADIEU', 'ADIOS', 'ALACK', 'ALOHA', 'AVAST', 'BAKAW', 'BASTA', 'BEGAD', 'BLESS', 'BLIGE', 'BRAVA', 'BRAVO', 'BRING', 'CHOOK', 'DAMME', 'DILDO', 'DITTO', 'FRICK', 'FUDGE', 'GOLLY', 'GRATZ', 'HALLO', 'HASTA', 'HAVOC', 'HELLA', 'HELLO', 'HOWAY', 'HOWDY', 'HULLO', 'HUZZA', 'JESUS', 'KAPOW', 'LOOSE', 'LORDY', 'MARRY', 'MERCY', 'NIGHT', 'PLONK', 'PSYCH', 'QUITE', 'SALVE', 'SKOAL', 'SNIFF', 'SOOEY', 'THERE', 'THIAM', 'THWAP', 'TOUGH', 'TWIRP', 'VIOLA', 'VIVAT', 'WACKO', 'WAHEY', 'WHIST', 'WILMA', 'WIRRA', 'WOOPS', 'WOWIE', 'YECCH', 'YEEHA', 'YEESH', 'YOWCH', 'ZOWIE', 'DONE'];
+      var filterwordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU','HELLO','MAGIC','HUMAN','PIANO','ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BEACH', 'BLOCK', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'CHAIN', 'CHAIR', 'CHIEF', 'CHILD', 'CLOCK', 'COACH', 'COAST', 'COURT', 'CRIME', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEPTH', 'DOUBT', 'DRAMA', 'DREAM', 'DRESS', 'DRIVE', 'EARTH', 'EVENT', 'FAULT', 'FIELD', 'FLOOR', 'FRUIT', 'GLASS', 'GRASS', 'GREEN', 'HEART', 'HORSE', 'HOTEL', 'HOUSE', 'JUDGE', 'LEVEL', 'LIGHT', 'LUNCH', 'm', 'METAL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NORTH', 'PANEL', 'PAPER', 'PHONE', 'PILOT', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'QUEEN', 'RADIO', 'RANGE', 'RIVER', 'SCENE', 'SCORE', 'SHAPE', 'SHARE', 'SHEEP', 'SLEEP', 'SMILE', 'SMOKE', 'SPACE', 'SPORT', 'START', 'STATE', 'STEEL', 'STONE', 'SUGAR', 'TOWER', 'TRACK', 'TRAIN', 'TRIAL', 'VALUE', 'VIDEO', 'WATER', 'WHITE', 'WORLD'];
+      var wordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU', 'HAVOC', 'HELLO', 'MAGIC', 'HUMAN', 'PIANO', 'ABUSE', 'ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BASIS', 'BEACH', 'BIRTH', 'BLOCK', 'BLOOD', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'BUYER', 'CAUSE', 'CHAIN', 'CHAIR', 'CHEST', 'CHIEF', 'CHILD', 'CHINA', 'CLAIM', 'CLASS', 'CLOCK', 'COACH', 'COAST', 'COURT', 'COVER', 'CREAM', 'CRIME', 'CROSS', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEATH', 'DEPTH', 'DOUBT', 'DRAFT', 'DRAMA', 'DREAM', 'DRESS', 'DRINK', 'DRIVE', 'EARTH', 'ENEMY', 'ENTRY', 'ERROR', 'EVENT', 'FAITH', 'FAULT', 'FIELD', 'FIGHT', 'FINAL', 'FLOOR', 'FOCUS', 'FORCE', 'FRAME', 'FRANK', 'FRONT', 'FRUIT', 'GLASS', 'GRANT', 'GRASS', 'GREEN', 'GROUP', 'GUIDE', 'HEART', 'HENRY', 'HORSE', 'HOTEL', 'HOUSE', 'IMAGE', 'INDEX', 'INPUT', 'ISSUE', 'JAPAN', 'JONES', 'JUDGE', 'KNIFE', 'LAURA', 'LAYER', 'LEVEL', 'LEWIS', 'LIGHT', 'LIMIT', 'LUNCH', 'MAJOR', 'MARCH', 'm', 'METAL', 'MODEL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NOISE', 'NORTH', 'NOVEL', 'NURSE', 'OFFER', 'ORDER', 'OTHER', 'OWNER', 'PANEL', 'PAPER', 'PARTY', 'PEACE', 'PETER', 'PHASE', 'PHONE', 'PIECE', 'PILOT', 'PITCH', 'PLACE', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'POUND', 'POWER', 'PRESS', 'PRICE', 'PRIDE', 'PRIZE', 'PROOF', 'QUEEN', 'RADIO', 'RANGE', 'RATIO', 'REPLY', 'RIGHT', 'RIVER', 'ROUND', 'ROUTE', 'RUGBY', 'SCALE', 'SCENE', 'SCOPE', 'SCORE', 'SENSE', 'SHAPE', 'SHARE', 'SHEEP', 'SHEET', 'SHIFT', 'SHIRT', 'SHOCK', 'SIGHT', 'SIMON', 'SKILL', 'SLEEP', 'SMILE', 'SMITH', 'SMOKE', 'SOUND', 'SOUTH', 'SPACE', 'SPEED', 'SPITE', 'SPORT', 'SQUAD', 'STAFF', 'STAGE', 'START', 'STATE', 'STEAM', 'STEEL', 'STOCK', 'STONE', 'STORE', 'STUDY', 'STUFF', 'STYLE', 'SUGAR', 'TABLE', 'TASTE', 'TERRY', 'THEME', 'THING', 'TITLE', 'TOTAL', 'TOUCH', 'TOWER', 'TRACK', 'TRADE', 'TRAIN', 'TREND', 'TRIAL', 'TRUST', 'TRUTH', 'UNCLE', 'UNION', 'UNITY', 'VALUE', 'VIDEO', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WATER', 'WHILE', 'WHITE', 'WHOLE', 'WOMAN', 'WORLD', 'YOUTH', '', '5LETTERPRONOUNS', '', 'ALCON', 'AUGHT', 'HELLA', 'ONE’S', 'OUGHT', 'THAME', 'THERE', 'THINE', 'THINE', 'WHERE', 'WHICH', 'WHOSE', 'WHOSO', 'YOURS', 'YOURS', '', '5LETTERVERBS', '', 'ADMIT', 'ADOPT', 'AGREE', 'ALLOW', 'ALTER', 'APPLY', 'ARGUE', 'ARISE', 'AVOID', 'BEGIN', 'BLAME', 'BREAK', 'BRING', 'BUILD', 'BURST', 'CARRY', 'CATCH', 'CAUSE', 'CHECK', 'CLAIM', 'CLEAN', 'CLEAR', 'CLIMB', 'CLOSE', 'COUNT', 'COVER', 'CROSS', 'DANCE', 'DOUBT', 'DRINK', 'DRIVE', 'ENJOY', 'ENTER', 'EXIST', 'FIGHT', 'FOCUS', 'FORCE', 'GUESS', 'IMPLY', 'ISSUE', 'JUDGE', 'LAUGH', 'LEARN', 'LEAVE', 'LET’S', 'LIMIT', 'MARRY', 'm', 'OCCUR', 'OFFER', 'ORDER', 'PHONE', 'PLACE', 'POINT', 'PRESS', 'PROVE', 'RAISE', 'REACH', 'REFER', 'RELAX', 'SERVE', 'SHALL', 'SHARE', 'SHIFT', 'SHOOT', 'SLEEP', 'SOLVE', 'SOUND', 'SPEAK', 'SPEND', 'SPLIT', 'STAND', 'START', 'STATE', 'STICK', 'STUDY', 'TEACH', 'THANK', 'THINK', 'THROW', 'TOUCH', 'TRAIN', 'TREAT', 'TRUST', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WORRY', 'WOULD', 'WRITE', '', '5LETTERADJECTIVES', '', 'ABOVE', 'ACUTE', 'ALIVE', 'ALONE', 'ANGRY', 'AWARE', 'AWFUL', 'BASIC', 'BLACK', 'BLIND', 'BRAVE', 'BRIEF', 'BROAD', 'BROWN', 'CHEAP', 'CHIEF', 'CIVIL', 'CLEAN', 'CLEAR', 'CLOSE', 'CRAZY', 'DAILY', 'DIRTY', 'EARLY', 'EMPTY', 'EQUAL', 'EXACT', 'EXTRA', 'FAINT', 'FALSE', 'FIFTH', 'FINAL', 'FIRST', 'FRESH', 'FRONT', 'FUNNY', 'GIANT', 'GRAND', 'GREAT', 'GREEN', 'GROSS', 'HAPPY', 'HARSH', 'HEAVY', 'HUMAN', 'IDEAL', 'INNER', 'JOINT', 'LARGE', 'LEGAL', 'LEVEL', 'LIGHT', 'LOCAL', 'LOOSE', 'LUCKY', 'MAGIC', 'MAJOR', 'MINOR', 'MORAL', 'NAKED', 'NASTY', 'NAVAL', 'OTHER', 'OUTER', 'PLAIN', 'PRIME', 'PRIOR', 'PROUD', 'QUICK', 'QUIET', 'RAPID', 'READY', 'RIGHT', 'ROMAN', 'ROUGH', 'ROUND', 'ROYAL', 'RURAL', 'SHARP', 'SHEER', 'SHORT', 'SILLY', 'SIXTH', 'SMALL', 'SMART', 'SOLID', 'SORRY', 'SPARE', 'STEEP', 'STILL', 'SUPER', 'SWEET', 'THICK', 'THIRD', 'TIGHT', 'TOTAL', 'TOUGH', 'UPPER', 'UPSET', 'URBAN', 'USUAL', 'VAGUE', 'VALID', 'VITAL', 'WHITE', 'WHOLE', 'WRONG', 'YOUNG', '', '5LETTERCONJUNCTIONS', '', 'AFORE', 'AFTER', 'BOTHE', 'OTHER', 'SINCE', 'SLASH', 'UNTIL', 'WHERE', 'WHILE', '', '5LETTERADVERBS', '', 'ABACK', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ACCEL', 'ADOWN', 'AFOOT', 'AFORE', 'AFOUL', 'AFTER', 'AGAIN', 'AGAPE', 'AGOGO', 'AGONE', 'AHEAD', 'AHULL', 'ALIFE', 'ALIKE', 'ALINE', 'ALOFT', 'ALONE', 'ALONG', 'ALOOF', 'ALOUD', 'AMISS', 'AMPLY', 'AMUCK', 'APACE', 'APART', 'APTLY', 'AREAR', 'ASIDE', 'ASKEW', 'AWFUL', 'BADLY', 'BALLY', 'BELOW', 'CANNY', 'CHEAP', 'CLEAN', 'CLEAR', 'COYLY', 'DAILY', 'DIMLY', 'DIRTY', 'DITTO', 'DRILY', 'DRYLY', 'DULLY', 'EARLY', 'EXTRA', 'FALSE', 'FATLY', 'FEYLY', 'FIRST', 'FITLY', 'FORTE', 'FORTH', 'FRESH', 'FULLY', 'FUNNY', 'GAILY', 'GAYLY', 'GODLY', 'GREAT', 'HAPLY', 'HEAVY', 'HELLA', 'HENCE', 'HOTLY', 'ICILY', 'INFRA', 'INTL.', 'JILDI', 'JOLLY', 'LAXLY', 'LENTO', 'LIGHT', 'LOWLY', 'MADLY', 'MAYBE', 'NEVER', 'NEWLY', 'NOBLY', 'ODDLY', 'OFTEN', 'OTHER', 'OUGHT', 'PARTY', 'PIANO', 'PLAIN', 'PLONK', 'PLUMB', 'PRIOR', 'QUEER', 'QUICK', 'QUITE', 'RAMEN', 'RAPID', 'REDLY', 'RIGHT', 'ROUGH', 'ROUND', 'SADLY', 'SECUS', 'SELLY', 'SHARP', 'SHEER', 'SHILY', 'SHORT', 'SHYLY', 'SILLY', 'SINCE', 'SLEEK', 'SLYLY', 'SMALL', 'SO-SO', 'SOUND', 'SPANG', 'SRSLY', 'STARK', 'STILL', 'STONE', 'STOUR', 'SUPER', 'TALLY', 'TANTO', 'THERE', 'THICK', 'TIGHT', 'TODAY', 'TOMOZ', 'TRULY', 'TWICE', 'UNDER', 'UTTER', 'VERRY', 'WANLY', 'WETLY', 'WHERE', 'WRONG', 'WRYLY', '', '5LETTERPREPOSITIONS', '', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ADOWN', 'AFORE', 'AFTER', 'ALONG', 'ALOOF', 'AMONG', 'BELOW', 'CIRCA', 'CROSS', 'FURTH', 'MINUS', 'NEATH', 'ROUND', 'SINCE', 'SPITE', 'UNDER', 'UNTIL', '', '5LETTERINTERJECTIONS', '', 'AARGH', 'ADIEU', 'ADIOS', 'ALACK', 'ALOHA', 'AVAST', 'BAKAW', 'BASTA', 'BEGAD', 'BLESS', 'BLIGE', 'BRAVA', 'BRAVO', 'BRING', 'CHOOK', 'DAMME', 'DILDO', 'DITTO', 'FRICK', 'FUDGE', 'GOLLY', 'GRATZ', 'HALLO', 'HASTA', 'HAVOC', 'HELLA', 'HELLO', 'HOWAY', 'HOWDY', 'HULLO', 'HUZZA', 'JESUS', 'KAPOW', 'LOOSE', 'LORDY', 'MARRY', 'MERCY', 'NIGHT', 'PLONK', 'PSYCH', 'QUITE', 'SALVE', 'SKOAL', 'SNIFF', 'SOOEY', 'THERE', 'THIAM', 'THWAP', 'TOUGH', 'TWIRP', 'VIOLA', 'VIVAT', 'WACKO', 'WAHEY', 'WHIST', 'WILMA', 'WIRRA', 'WOOPS', 'WOWIE', 'YECCH', 'YEEHA', 'YEESH', 'YOWCH', 'ZOWIE', 'DONE'];
       var solution;
       var loc = window.location.href;
       console.log(loc);
@@ -138,6 +156,30 @@
             console.log('rendering');
             ctx.fillText(line1[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
           }
+          
+          console.log('WHAT IT IS',colors1,makelist(localStorage.getItem('c1')));
+          if (colors1 != [] && !arraysequal(['b','b','b','b','b'],colors1) && ct == 0){
+            if (colors1[actnumber] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors1[actnumber] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors1[actnumber] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+              console.log('filled a yellow');
+            } 
+            if (colors1[actnumber] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+            console.log(colors1[actnumber]);
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));    
+          }
+          ctx.strokeStyle = 'rgb(255,255,255)';
+
           if (line2[actnumber]){
             //ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i,h+2*height/18);
           }
@@ -237,7 +279,7 @@
           let letter = lst[i];
           console.log(letter,lst[i]);
           if (word.includes(letter) && letter == word.substring(i,i+1)){
-            returnlist.push('match')
+            returnlist.push('m')
             if (letter == 'Q'){ keyrow1[0] = 'found';} if (letter == 'W'){ keyrow1[1] = 'found'}if (letter == 'E'){ keyrow1[2] = 'found'}if (letter == 'R'){ keyrow1[3] = 'found'}if (letter == 'T'){ keyrow1[4] = 'found'}if (letter == 'Y'){ keyrow1[5] = 'found'}if (letter == 'U'){ keyrow1[6] = 'found'}if (letter == 'I'){ keyrow1[7] = 'found'}if (letter == 'O'){ keyrow1[8] = 'found'}if (letter == 'P'){ keyrow1[9] = 'found'}
             if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
             if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
@@ -251,18 +293,18 @@
               j += 1;
             }
             if ((yellowletter.includes(letter) && countchar(word,letter) == 1 ) || (countchar(word,letter) == 1 && word.includes(letter) && verifynext)){
-              returnlist.push('false');
+              returnlist.push('f');
               if (letter == 'Q'){ keyrow1[0] = 'found';} if (letter == 'W'){ keyrow1[1] = 'found'}if (letter == 'E'){ keyrow1[2] = 'found'}if (letter == 'R'){ keyrow1[3] = 'found'}if (letter == 'T'){ keyrow1[4] = 'found'}if (letter == 'Y'){ keyrow1[5] = 'found'}if (letter == 'U'){ keyrow1[6] = 'found'}if (letter == 'I'){ keyrow1[7] = 'found'}if (letter == 'O'){ keyrow1[8] = 'found'}if (letter == 'P'){ keyrow1[9] = 'found'}
               if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
               if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
             } else if (word.includes(letter)){
-              returnlist.push('includes');
+              returnlist.push('i');
               if (letter == 'Q'){ keyrow1[0] = 'found';} if (letter == 'W'){ keyrow1[1] = 'found'}if (letter == 'E'){ keyrow1[2] = 'found'}if (letter == 'R'){ keyrow1[3] = 'found'}if (letter == 'T'){ keyrow1[4] = 'found'}if (letter == 'Y'){ keyrow1[5] = 'found'}if (letter == 'U'){ keyrow1[6] = 'found'}if (letter == 'I'){ keyrow1[7] = 'found'}if (letter == 'O'){ keyrow1[8] = 'found'}if (letter == 'P'){ keyrow1[9] = 'found'}
               if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
               if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
               yellowletter.push(letter);
             } else {
-              returnlist.push('false');
+              returnlist.push('f');
               if (letter == 'Q'){ keyrow1[0] = 'false';} if (letter == 'W'){ keyrow1[1] = 'false'}if (letter == 'E'){ keyrow1[2] = 'false'}if (letter == 'R'){ keyrow1[3] = 'false'}if (letter == 'T'){ keyrow1[4] = 'false'}if (letter == 'Y'){ keyrow1[5] = 'false'}if (letter == 'U'){ keyrow1[6] = 'false'}if (letter == 'I'){ keyrow1[7] = 'false'}if (letter == 'O'){ keyrow1[8] = 'false'}if (letter == 'P'){ keyrow1[9] = 'false'}
               if (letter == 'A'){ keyrow2[0] = 'false';} if (letter == 'S'){ keyrow2[1] = 'false'}if (letter == 'D'){ keyrow2[2] = 'false'}if (letter == 'F'){ keyrow2[3] = 'false'}if (letter == 'G'){ keyrow2[4] = 'false'}if (letter == 'H'){ keyrow2[5] = 'false'}if (letter == 'J'){ keyrow2[6] = 'false'}if (letter == 'K'){ keyrow2[7] = 'false'}if (letter == 'L'){ keyrow2[8] = 'false'}
               if (letter == 'Z'){ keyrow3[0] = 'false';} if (letter == 'X'){ keyrow3[1] = 'false'}if (letter == 'C'){ keyrow3[2] = 'false'}if (letter == 'V'){ keyrow3[3] = 'false'}if (letter == 'B'){ keyrow3[4] = 'false'}if (letter == 'N'){ keyrow3[5] = 'false'}if (letter == 'M'){ keyrow3[6] = 'false'}
@@ -273,7 +315,7 @@
         drawkeyboard(colors1, keyrow1, keyrow2, keyrow3);
         
         const ctx = canvas.getContext('2d');
-        var correctlist = ["match","match","match","match","match"];
+        var correctlist = ["m","m","m","m","m"];
         console.log(correctlist, returnlist);
         var notif = arraysequal(returnlist,correctlist);
         if (notif){
@@ -282,6 +324,8 @@
           ctx.fillText('YOU GOT IT!', 50, window.innerHeight*3/5);
           ctx.fillText('reload for another one', 50, window.innerHeight*4/5);
           localStorage.setItem('solution','solved!');
+          localStorage.setItem('l1','done');
+          localStorage.setItem('c1','done');
         }
         return returnlist
       }
@@ -397,6 +441,7 @@
           if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 5)){
             if (currentline == 1 ){ //&& wordbank.includes(line1[0]+line1[1]+line1[2]+line1[3]+line1[4])){
               colors1 = checkmatch(line1,solution);
+              localStorage.setItem('c1',makestring(colors1));
             } else if (currentline == 2 ){ //&& wordbank.includes(line2[0]+line2[1]+line2[2]+line2[3]+line2[4])){
               colors2 = checkmatch(line2,solution);
             } else if (currentline == 3 ){ //&& wordbank.includes(line3[0]+line3[1]+line3[2]+line3[3]+line3[4])){
@@ -407,22 +452,26 @@
               colors5 = checkmatch(line5,solution);
             } else if (currentline == 6 ){ //&& wordbank.includes(line6[0]+line6[1]+line6[2]+line6[3]+line6[4])){
               colors6 = checkmatch(line6,solution);
-              if (colors1 == ['match','match','match','match','match'] || colors2 == ['match','match','match','match','match'] || colors3 == ['match','match','match','match','match'] || colors4 == ['match','match','match','match','match'] || colors5 == ['match','match','match','match','match'] || colors6 == ['match','match','match','match','match']){
+              if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
                 console.log('got on last try');
               } else {
                 ctx.fillStyle = 'rgb(255,255,255)';
                 ctx.fillText('The word was '+solution, 500, height*4/5);
                 localStorage.setItem('solution','solved!');
+                localStorage.setItem('l1','done');
+                localStorage.setItem('c1','done');
               }
             } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
               ctx.fillText('Word not in word bank, but limiting off', 100, 200);
               currentline -= 1;
             }
-            if (colors1 == ['match','match','match','match','match'] || colors2 == ['match','match','match','match','match'] || colors3 == ['match','match','match','match','match'] || colors4 == ['match','match','match','match','match'] || colors5 == ['match','match','match','match','match'] || colors6 == ['match','match','match','match','match']){
+            if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
               ctx.fillStyle = 'rgb(255,255,255)';
               ctx.fillText('YOU GOT IT!', 500, 500);
               console.log('you got it');
+              localStorage.setItem('l1','done');
+              localStorage.setItem('c1','done');
             }
             ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
@@ -528,15 +577,15 @@
             if ((colors1[indexnum] == 'b' && ct == 0) || (colors2[indexnum] == 'b' && ct == 1) || (colors3[indexnum] == 'b' && ct == 2) || (colors4[indexnum] == 'b' && ct == 3) || (colors5[indexnum] == 'b' && ct == 4) || (colors6[indexnum] == 'b' && ct == 5)){
               ctx.strokeStyle = 'rgb(255,255,255)';
               ctx.fillStyle = 'rgb(0,0,0)';
-            } else if ((colors1[indexnum] == 'match' && ct == 0) || (colors2[indexnum] == 'match' && ct == 1) || (colors3[indexnum] == 'match' && ct == 2) || (colors4[indexnum] == 'match' && ct == 3) || (colors5[indexnum] == 'match' && ct == 4) || (colors6[indexnum] == 'match' && ct == 5)){
+            } else if ((colors1[indexnum] == 'm' && ct == 0) || (colors2[indexnum] == 'm' && ct == 1) || (colors3[indexnum] == 'm' && ct == 2) || (colors4[indexnum] == 'm' && ct == 3) || (colors5[indexnum] == 'm' && ct == 4) || (colors6[indexnum] == 'm' && ct == 5)){
               ctx.strokeStyle = 'rgb(0,200,0)';
               ctx.fillStyle = 'rgb(0,200,0)';
               forcewrite = true;
-            } else if ((colors1[indexnum] == 'includes' && ct == 0) || (colors2[indexnum] == 'includes' && ct == 1) || (colors3[indexnum] == 'includes' && ct == 2) || (colors4[indexnum] == 'includes' && ct == 3) || (colors5[indexnum] == 'includes' && ct == 4) || (colors6[indexnum] == 'includes' && ct == 5)){
+            } else if ((colors1[indexnum] == 'i' && ct == 0) || (colors2[indexnum] == 'i' && ct == 1) || (colors3[indexnum] == 'i' && ct == 2) || (colors4[indexnum] == 'i' && ct == 3) || (colors5[indexnum] == 'i' && ct == 4) || (colors6[indexnum] == 'i' && ct == 5)){
               ctx.strokeStyle = 'rgb(200,200,0)';
               ctx.fillStyle = 'rgb(200,200,0)';
               forcewrite = true;
-            } else if ((colors1[indexnum] == 'false' && ct == 0) || (colors2[indexnum] == 'false' && ct == 1) || (colors3[indexnum] == 'false' && ct == 2) || (colors4[indexnum] == 'false' && ct == 3) || (colors5[indexnum] == 'false' && ct == 4) || (colors6[indexnum] == 'false' && ct == 5)){
+            } else if ((colors1[indexnum] == 'f' && ct == 0) || (colors2[indexnum] == 'f' && ct == 1) || (colors3[indexnum] == 'f' && ct == 2) || (colors4[indexnum] == 'f' && ct == 3) || (colors5[indexnum] == 'f' && ct == 4) || (colors6[indexnum] == 'f' && ct == 5)){
               ctx.strokeStyle = 'rgb(200,0,0)';
               ctx.fillStyle = 'rgb(200,0,0)';
               forcewrite = true;
@@ -545,10 +594,11 @@
               ctx.fillStyle = 'rgb(0,0,0)';
             }
 
-            if (colors1 == ['match','match','match','match','match'] || colors2 == ['match','match','match','match','match'] || colors3 == ['match','match','match','match','match'] || colors4 == ['match','match','match','match','match'] || colors5 == ['match','match','match','match','match'] || colors6 == ['match','match','match','match','match']){
+            if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
               ctx.fillStyle = 'rgb(255,255,255)';
               ctx.fillText('YOU GOT IT!', 300, 100);
               console.log('you got it');
+              localStorage.setItem('l1','done');
             }
             
             indexnum += 1;
@@ -557,7 +607,8 @@
               ctx.strokeStyle = ctx.fillStyle;
               //ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h+2*(currentline-1)*height/18,50*(width/1024),50*(width/1024));
               ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
-              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));            } else {
+              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));        
+            } else {
               ctx.strokeStyle = 'rgb(0,0,0)';
               //ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+2,h+45*(width/1024),50*(width/1024)-4,7*(width/1024));
             }
