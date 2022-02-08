@@ -77,6 +77,14 @@
       var next = false;
       var currentline = 1;
 
+      // reset toggle
+      // localStorage.setItem('c1','bbbbb');
+      // localStorage.setItem('c2','bbbbb');
+      // localStorage.setItem('c3','bbbbb');
+      // localStorage.setItem('c4','bbbbb');
+      // localStorage.setItem('c5','bbbbb');
+      // localStorage.setItem('c6','bbbbb');
+
       var line1 = localStorage.getItem('l1');
       if (line1 == null || line1 == 'done'){
         line1 = [];
@@ -91,10 +99,33 @@
         line2 = makelist(line2);
       }
 
-      var line3 = [];
-      var line4 = [];
-      var line5 = [];
-      var line6 = [];
+      var line3 = localStorage.getItem('l3');
+      if (line3 == null || line3 == 'done'){
+        line3 = [];
+      } else {
+        line3 = makelist(line3);
+      }
+
+      var line4 = localStorage.getItem('l4');
+      if (line4 == null || line4 == 'done'){
+        line4 = [];
+      } else {
+        line4 = makelist(line4);
+      }
+
+      var line5 = localStorage.getItem('l5');
+      if (line5 == null || line5 == 'done'){
+        line5 = [];
+      } else {
+        line5 = makelist(line5);
+      }
+
+      var line6 = localStorage.getItem('l6');
+      if (line6 == null || line6 == 'done'){
+        line6 = [];
+      } else {
+        line6 = makelist(line6);
+      }
 
       var colors1 = localStorage.getItem('c1');
       if (colors1 == null || colors1 == 'done'){
@@ -119,6 +150,50 @@
 
       if (line2.length >= 5 && !arraysequal(['b','b','b','b','b'],colors2)){
         currentline = 3;
+      }
+
+      var colors3 = localStorage.getItem('c3');
+      if (colors3 == null || colors3 == 'done'){
+        colors3 = ['b','b','b','b','b'];
+        localStorage.setItem('c3',makestring(colors3));
+      } else {
+        colors3 = makelist(colors3);
+      }
+
+      console.log(line3,colors3);
+
+      if (line3.length >= 5 && !arraysequal(['b','b','b','b','b'],colors3)){
+        currentline = 4;
+      }
+      
+      var colors4 = localStorage.getItem('c4');
+      if (colors4 == null || colors4 == 'done'){
+        colors4 = ['b','b','b','b','b'];
+        localStorage.setItem('c4',makestring(colors4));
+      } else {
+        colors4 = makelist(colors4);
+      }
+
+      if (line4.length >= 5 && !arraysequal(['b','b','b','b','b'],colors4)){
+        currentline = 5;
+      }
+      var colors5 = localStorage.getItem('c5');
+      if (colors5 == null || colors5 == 'done'){
+        colors5 = ['b','b','b','b','b'];
+        localStorage.setItem('c5',makestring(colors5));
+      } else {
+        colors5 = makelist(colors5);
+      }
+
+      if (line5.length >= 5 && !arraysequal(['b','b','b','b','b'],colors5)){
+        currentline = 6;
+      }
+      var colors6 = localStorage.getItem('c6');
+      if (colors6 == null || colors6 == 'done'){
+        colors6 = ['b','b','b','b','b'];
+        localStorage.setItem('c6',makestring(colors6));
+      } else {
+        colors6 = makelist(colors6);
       }
 
       var colors3 = ['b','b','b','b','b'];
@@ -164,14 +239,24 @@
           ctx.fillStyle = 'rgb(255,255,255)';
           ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
           if (line1[actnumber-5]){
-            console.log('rendering');
             ctx.fillText(line1[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
           }
           if (line2[actnumber-5]){
-            console.log('rendering');
             ctx.fillText(line2[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 2*window.innerHeight/18 + 35*scalefactor);
           }
-          
+          if (line3[actnumber-5]){
+            ctx.fillText(line3[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 4*window.innerHeight/18 + 35*scalefactor);
+          }  
+          if (line4[actnumber-5]){
+            ctx.fillText(line4[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 4*window.innerHeight/18 + 35*scalefactor);
+          }  
+          if (line5[actnumber-5]){
+            ctx.fillText(line5[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 4*window.innerHeight/18 + 35*scalefactor);
+          }  
+          if (line6[actnumber-5]){
+            ctx.fillText(line6[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 4*window.innerHeight/18 + 35*scalefactor);
+          }  
+        
           if (colors1 != [] && !arraysequal(['b','b','b','b','b'],colors1) && ct == 0){
             if (colors1[actnumber] == 'b'){
               ctx.fillStyle = 'rgb(0,0,0)';
@@ -191,9 +276,7 @@
             ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));    
           }
           
-          console.log('go',colors2);
           if (colors2 != [] && !arraysequal(['b','b','b','b','b'],colors2) && ct == 1){
-            console.log('next',colors2[actnumber-5]);
             if (colors2[actnumber-5] == 'b'){
               ctx.fillStyle = 'rgb(0,0,0)';
             } 
@@ -210,7 +293,82 @@
             ctx.strokeStyle = ctx.fillStyle;
             ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
             ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
-            console.log('went in'); 
+          }
+
+          if (colors3 != [] && !arraysequal(['b','b','b','b','b'],colors3) && ct == 2){
+            if (colors3[actnumber-5] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors3[actnumber-5] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors3[actnumber-5] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors3[actnumber-5] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          if (colors4 != [] && !arraysequal(['b','b','b','b','b'],colors4) && ct == 3){
+            if (colors4[actnumber-5] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors4[actnumber-5] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors4[actnumber-5] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors4[actnumber-5] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          if (colors5 != [] && !arraysequal(['b','b','b','b','b'],colors5) && ct == 4){
+            if (colors5[actnumber-5] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors5[actnumber-5] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors5[actnumber-5] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors5[actnumber-5] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          if (colors6 != [] && !arraysequal(['b','b','b','b','b'],colors6) && ct == 5){
+            if (colors6[actnumber-5] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors6[actnumber-5] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors6[actnumber-5] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors6[actnumber-5] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
           }
 
           ctx.strokeStyle = 'rgb(255,255,255)';
@@ -361,6 +519,10 @@
           localStorage.setItem('solution','solved!');
           localStorage.setItem('l1','done');
           localStorage.setItem('l2','done');
+          localStorage.setItem('l3','done');
+          localStorage.setItem('l4','done');
+          localStorage.setItem('l5','done');
+          localStorage.setItem('l6','done');
           localStorage.setItem('c1','done');
           localStorage.setItem('c2','done');
         }
@@ -484,12 +646,16 @@
               localStorage.setItem('c2',makestring(colors2));
             } else if (currentline == 3 ){ //&& wordbank.includes(line3[0]+line3[1]+line3[2]+line3[3]+line3[4])){
               colors3 = checkmatch(line3,solution);
+              localStorage.setItem('c3',makestring(colors3));
             } else if (currentline == 4 ){ //&& wordbank.includes(line4[0]+line4[1]+line4[2]+line4[3]+line4[4])){
               colors4 = checkmatch(line4,solution);
+              localStorage.setItem('c4',makestring(colors4));
             } else if (currentline == 5 ){ //&& wordbank.includes(line5[0]+line5[1]+line5[2]+line5[3]+line5[4])){
               colors5 = checkmatch(line5,solution);
+              localStorage.setItem('c5',makestring(colors5));
             } else if (currentline == 6 ){ //&& wordbank.includes(line6[0]+line6[1]+line6[2]+line6[3]+line6[4])){
               colors6 = checkmatch(line6,solution);
+              localStorage.setItem('c6',makestring(colors6));
               if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
                 console.log('got on last try');
               } else {
@@ -498,6 +664,10 @@
                 localStorage.setItem('solution','solved!');
                 localStorage.setItem('l1','done');
                 localStorage.setItem('l2','done');
+                localStorage.setItem('l3','done');
+                localStorage.setItem('l4','done');
+                localStorage.setItem('l5','done');
+                localStorage.setItem('l6','done');
                 localStorage.setItem('c1','done');
                 localStorage.setItem('c2','done');
               }
@@ -512,6 +682,10 @@
               console.log('you got it');
               localStorage.setItem('l1','done');
               localStorage.setItem('l2','done');
+              localStorage.setItem('l3','done');
+              localStorage.setItem('l4','done');
+              localStorage.setItem('l5','done');
+              localStorage.setItem('l6','done');
               localStorage.setItem('c1','done');
               localStorage.setItem('c2','done');
             }
@@ -548,15 +722,19 @@
             }
             if (currentline == 3){
               line3.push(actkey);
+              localStorage.setItem('l3',makestring(line3));
             }
             if (currentline == 4){
               line4.push(actkey);
+              localStorage.setItem('l4',makestring(line3));
             }
             if (currentline == 5){
               line5.push(actkey);
+              localStorage.setItem('l5',makestring(line3));
             }
             if (currentline == 6){
               line6.push(actkey);
+              localStorage.setItem('l6',makestring(line3));
             }
             console.log('pushed',actkey);
             lkey = actkey;
@@ -574,29 +752,33 @@
           if (currentline == 2){
             line2.pop(line2.length-1);
             erasev = line2.length;
-            localStorage.setItem('l2',makestring(line1));
+            localStorage.setItem('l2',makestring(line2));
           }
           if (currentline == 3){
             line3.pop(line3.length-1);
             erasev = line3.length;
+            localStorage.setItem('l3',makestring(line3));
           }
           if (currentline == 4){
             line4.pop(line4.length-1);
             erasev = line4.length;
+            localStorage.setItem('l4',makestring(line4));
           }
           if (currentline == 5){
             line5.pop(line5.length-1);
             erasev = line5.length;
+            localStorage.setItem('l5',makestring(line5));
           }
           if (currentline == 6){
             line6.pop(line6.length-1);
             erasev = line6.length;
+            localStorage.setItem('l6',makestring(line6));
           }
 
           console.log('backspaced, print',eraseltr)
           //event.preventDefault();
         }
-        console.log('line2:',line2);
+        console.log('current',currentline);
 
         ctx.fillStyle = 'rgb(0,0,0)';
         let line1sizer = (width/1024)*35;
