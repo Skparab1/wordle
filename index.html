@@ -85,16 +85,16 @@
       // localStorage.setItem('c5','bbbbb');
       // localStorage.setItem('c6','bbbbb');
 
-      var wins = localStorage.getItem('wins');
+      var wins = parseInt(localStorage.getItem('wins'));
       if (wins == null){
         wins = 0;
-        localStorage.setItem('win',0);
+        localStorage.setItem('wins','0');
       }
 
-      var losses = localStorage.getItem('losses');
+      var losses = parseInt(localStorage.getItem('losses'));
       if (losses == null){
         losses = 0;
-        localStorage.setItem('losses',0);
+        localStorage.setItem('losses','0');
       }
 
       var line1 = localStorage.getItem('l1');
@@ -546,7 +546,7 @@
           localStorage.setItem('c4','done');
           localStorage.setItem('c5','done');
           localStorage.setItem('c6','done');
-          localStorage.setItem('wins',wins+1);
+          localStorage.setItem('wins',String(parseInt(wins)+1));
         }
         return returnlist
       }
@@ -696,10 +696,10 @@
                 localStorage.setItem('c4','done');
                 localStorage.setItem('c5','done');
                 localStorage.setItem('c6','done');
-                localStorage.setItem('losses',losses+1);
+                localStorage.setItem('losses',String(parseInt(losses)+1));
                 
                 ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), 500, height*5/6);
-                ctx.fillText('Win percentage'+(localStorage.getItem('wins')/(localStorage.getItem('wins')+localStorage.getItem('losses'))), 500, height*6/7);
+                ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))), 500, height*6/7);
               }
             } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
