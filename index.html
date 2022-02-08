@@ -76,7 +76,15 @@
       var checked = true;
       var next = false;
       var currentline = 1;
-      var line1 = [];
+      var line1 = localStorage.getItem('l1');
+      if (line1 == null || line1 == 'done'){
+        line1 = [];
+      } else {
+        line1 = makelist(line1);
+      }
+      //localStorage.setItem('l1',[]);
+
+      //line1 = [];
       var line2 = [];
       var line3 = [];
       var line4 = [];
@@ -116,14 +124,24 @@
       let ct = 0
       var renderheight = 2*height/18;
       var actnumber = 0
+      var scalefactor = width/1024;
       drawkeyboard(colors1, keyrow1, keyrow2, keyrow3);
+
+      txtsize = scalefactor*35;
+      ctx.font = txtsize+'px Arial';
       while (ct < 6){
         let i = 27;
         while (i >= -17){
+          ctx.fillStyle = 'rgb(255,255,255)';
           ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
-          if (line1[actnumber]){
-            ctx.fillText(line1[0], xcenter-totaluiwidth/(2*27)*i,h);
+          if (line1[actnumber-5]){
+            console.log('rendering');
+            ctx.fillText(line1[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
           }
+          if (line2[actnumber]){
+            //ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i,h+2*height/18);
+          }
+          //ctx.fillText(line1[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
           //console.log(actnumber,erasev);
           // if (actnumber == erasev){
           //   console.log('erased');
@@ -138,7 +156,10 @@
         h = h + 2*height/18;
         ct += 1;
       }
-      
+
+      console.log(makestring(['i','a','d']));
+      console.log(makelist('hello'));
+
       ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
       ctx.font = '70px Arial';
       //ctx.fillText(line1[0], 100, 100);
@@ -146,6 +167,28 @@
       function degToRad(degrees) {
         return degrees * Math.PI / 180;
       };
+
+      function makestring(lst){
+        let i = 0;
+        let str = '';
+        while (i < lst.length){
+          str = str + lst[i];
+          i += 1;
+        }
+
+        return str
+      }
+
+      function makelist(str){
+        let i = 0;
+        let lst = [];
+        while (i < str.length){
+          lst.push(str.substring(i,i+1));
+          i += 1;
+        }
+
+        return lst
+      }
 
       function truelength(lst){
         let i = 0;
@@ -402,12 +445,14 @@
           checked = false;
         }
 
-        console.log(currentline, checked);
+        console.log(localStorage.getItem('l1'));
+
         
         if (actkey != 'Backspace'){
           if (filterletters.includes(actkey) && checked){
             if (currentline == 1){
               line1.push(actkey);
+              localStorage.setItem('l1',makestring(line1));
             }
             if (currentline == 2){
               line2.push(actkey);
