@@ -86,17 +86,19 @@
       // localStorage.setItem('c6','bbbbb');
       
 
-      var wins = parseInt(localStorage.getItem('win'));
+      var wins = localStorage.getItem('win');
       if (wins == null){
         wins = 0;
         localStorage.setItem('win','0');
       }
+      wins = parseInt(wins);
 
-      var losses = parseInt(localStorage.getItem('loss'));
+      var losses = localStorage.getItem('loss');
       if (losses == null){
         losses = 0;
         localStorage.setItem('loss','0');
       }
+      losses = parseInt(losses);
 
       var line1 = localStorage.getItem('l1');
       if (line1 == null || line1 == 'done'){
@@ -248,8 +250,8 @@
       var solution;
       var loc = window.location.href;
       console.log(loc);
-      if (loc == 'https://skparab1.github.io/wordle/'){
-        solution = 'CLOCK';
+      if (loc == 'https://skparab1.github.io/wordle/' || loc == 'https://skparab1.github.io/wordle/daily'){
+        solution = 'BOOKS';
       } else if (sltn != null && sltn != 'solved!'){
         solution = sltn;
       } else {
@@ -580,7 +582,7 @@
 
           //ctx.fillText('YOU GOT IT! Reload for another one.', width/10, window.innerHeight*6/10);
           ctx.fillText('Wins: '+localStorage.getItem('win')+'   Losses: '+localStorage.getItem('loss'), width/10, height*8/10);
-          ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss')))),width/10, height*9/10);
+          ctx.fillText('Win percentage: '+((parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss'))))*100)+'%',width/10, height*9/10);
 
         }
         return returnlist
@@ -738,7 +740,7 @@
               }
               
               ctx.fillText('Wins: '+localStorage.getItem('win')+'   Losses: '+localStorage.getItem('loss'), width/10, height*8/10);
-              ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss')))),width/10, height*9/10);
+              ctx.fillText('Win percentage: '+((parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss'))))*100)+'%',width/10, height*9/10);
            } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
               ctx.fillText('Word not in word bank, but limiting off', 100, 200);
@@ -1002,7 +1004,7 @@
     </script>
     <h1 style="color:rgb(225, 252, 71);"></h1> Skparab1 Software</h1>
     <h1 style="color:rgb(225, 252, 71);"></h1> hello</h1>
-    <h1 style="color:rgb(225, 252, 71);"> test</h1>
+    <h1 style="color:rgb(225, 252, 71);"> If you see this then you probably should reload so that the canvas auto resizes</h1>
     <h1 style="color:rgb(225, 252, 71);"></h1> Skparab1 Software</h1>
   </body>
 </html>
