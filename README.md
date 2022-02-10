@@ -1,5 +1,5 @@
 # wordle
-An implementation of wordle in html canvas + js. Skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle at https://skparab1.github.io/wordle/random
+An implementation of wordle in html canvas + js. Skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle at https://skparab1.github.io/wordle/random. This might be buggy (its just a test)
 
 ## Main features
 - Color graphics
@@ -14,6 +14,7 @@ An implementation of wordle in html canvas + js. Skparab1 daily wordle at https:
 <img width="643" alt="Screen Shot 2022-02-09 at 9 01 47 PM" src="https://user-images.githubusercontent.com/71990977/153340518-e5f3de3a-82f7-4e20-ba97-854e476c8dc1.png">
 
 - canvas auto sizer
+- win loss counter with win percentage
 
 ## Demo
 
