@@ -84,17 +84,18 @@
       // localStorage.setItem('c4','bbbbb');
       // localStorage.setItem('c5','bbbbb');
       // localStorage.setItem('c6','bbbbb');
+      
 
-      var wins = parseInt(localStorage.getItem('wins'));
+      var wins = parseInt(localStorage.getItem('win'));
       if (wins == null){
         wins = 0;
-        localStorage.setItem('wins','0');
+        localStorage.setItem('win','0');
       }
 
-      var losses = parseInt(localStorage.getItem('losses'));
+      var losses = parseInt(localStorage.getItem('loss'));
       if (losses == null){
         losses = 0;
-        localStorage.setItem('losses','0');
+        localStorage.setItem('loss','0');
       }
 
       var line1 = localStorage.getItem('l1');
@@ -575,11 +576,11 @@
           localStorage.setItem('keyrow1','done');
           localStorage.setItem('keyrow2','done');
           localStorage.setItem('keyrow3','done');
-          localStorage.setItem('wins',String(parseInt(wins)+1));
+          localStorage.setItem('win',String(parseInt(wins)+1));
 
           //ctx.fillText('YOU GOT IT! Reload for another one.', width/10, window.innerHeight*6/10);
-          ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), width/10, height*8/10);
-          ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))),width/10, height*9/10);
+          ctx.fillText('Wins: '+localStorage.getItem('win')+'   Losses: '+localStorage.getItem('loss'), width/10, height*8/10);
+          ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss')))),width/10, height*9/10);
 
         }
         return returnlist
@@ -733,11 +734,11 @@
                 localStorage.setItem('keyrow1','done');
                 localStorage.setItem('keyrow2','done');
                 localStorage.setItem('keyrow3','done');
-                localStorage.setItem('losses',String(parseInt(losses)+1));
+                localStorage.setItem('loss',String(parseInt(losses)+1));
               }
               
-              ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), width/10, height*8/10);
-              ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))),width/10, height*9/10);
+              ctx.fillText('Wins: '+localStorage.getItem('win')+'   Losses: '+localStorage.getItem('loss'), width/10, height*8/10);
+              ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss')))),width/10, height*9/10);
            } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
               ctx.fillText('Word not in word bank, but limiting off', 100, 200);
