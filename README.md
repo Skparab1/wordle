@@ -2,10 +2,10 @@
 skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle at https://skparab1.github.io/wordle/random
 
 ## Main features
-- Colored frames
-- optimized refresh
+- Color graphics
+- optimized refresh (only when typing)
 - word bank of 600 words
-- saves words and feedback (mostly done)
+- saves words and feedback
 
 ## Need to do
 - save word
