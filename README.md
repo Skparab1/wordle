@@ -9,7 +9,7 @@ skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle 
 - optimized refresh (only when typing)
 - word bank of 600 words
 - saves words and feedback
-- keyboard feedback
+- color feedback keyboard
 - canvas auto sizer
 
 ## Need to do
