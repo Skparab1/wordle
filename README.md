@@ -18,6 +18,8 @@ An implementation of wordle in html canvas + js. Skparab1 daily wordle at https:
 
 ## Demo
 
+![ezgif com-gif-maker(11)](https://user-images.githubusercontent.com/71990977/153342379-2e5fab6a-f536-466b-b695-b60a1741b789.gif)
+
 ## Pages
 - /wordle - main test page, does the equivilant of daily
 - /wordle/daily - daily wordle
