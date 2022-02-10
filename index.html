@@ -217,25 +217,27 @@
 
       var keyrow1 = localStorage.getItem('keyrow1');
       if (keyrow1 == null || keyrow1 == 'done'){
-        keyrow1 = ['','','','','','','','','',''];
+        keyrow1 = ['-','-','-','-','-','-','-','-','-','-'];
         localStorage.setItem('keyrow1',makestring(keyrow1));
       } else {
         keyrow1 = makelist(keyrow1);
       }
       var keyrow2 = localStorage.getItem('keyrow2');
       if (keyrow2 == null || keyrow2 == 'done'){
-        keyrow2 = ['','','','','','','','','',''];
+        keyrow2 = ['-','-','-','-','-','-','-','-','-','-'];
         localStorage.setItem('keyrow2',makestring(keyrow2));
       } else {
         keyrow2 = makelist(keyrow2);
       }
       var keyrow3 = localStorage.getItem('keyrow3');
       if (keyrow3 == null || keyrow3 == 'done'){
-        keyrow3 = ['','','','','','','','','',''];
+        keyrow3 = ['-','-','-','-','-','-','-','-','-','-'];
         localStorage.setItem('keyrow3',makestring(keyrow3));
       } else {
         keyrow3 = makelist(keyrow3);
       }
+
+      console.log('it',keyrow1,keyrow2,keyrow3);
 
       drawkeyboard(colors1,keyrow1,keyrow2,keyrow3);
 
@@ -511,9 +513,9 @@
           console.log(letter,lst[i]);
           if (word.includes(letter) && letter == word.substring(i,i+1)){
             returnlist.push('m')
-            if (letter == 'Q'){ keyrow1[0] = 'found';} if (letter == 'W'){ keyrow1[1] = 'found'}if (letter == 'E'){ keyrow1[2] = 'found'}if (letter == 'R'){ keyrow1[3] = 'found'}if (letter == 'T'){ keyrow1[4] = 'found'}if (letter == 'Y'){ keyrow1[5] = 'found'}if (letter == 'U'){ keyrow1[6] = 'found'}if (letter == 'I'){ keyrow1[7] = 'found'}if (letter == 'O'){ keyrow1[8] = 'found'}if (letter == 'P'){ keyrow1[9] = 'found'}
-            if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
-            if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
+            if (letter == 'Q'){ keyrow1[0] = 'c';} if (letter == 'W'){ keyrow1[1] = 'c'}if (letter == 'E'){ keyrow1[2] = 'c'}if (letter == 'R'){ keyrow1[3] = 'c'}if (letter == 'T'){ keyrow1[4] = 'c'}if (letter == 'Y'){ keyrow1[5] = 'c'}if (letter == 'U'){ keyrow1[6] = 'c'}if (letter == 'I'){ keyrow1[7] = 'c'}if (letter == 'O'){ keyrow1[8] = 'c'}if (letter == 'P'){ keyrow1[9] = 'c'}
+            if (letter == 'A'){ keyrow2[0] = 'c';} if (letter == 'S'){ keyrow2[1] = 'c'}if (letter == 'D'){ keyrow2[2] = 'c'}if (letter == 'F'){ keyrow2[3] = 'c'}if (letter == 'G'){ keyrow2[4] = 'c'}if (letter == 'H'){ keyrow2[5] = 'c'}if (letter == 'J'){ keyrow2[6] = 'c'}if (letter == 'K'){ keyrow2[7] = 'c'}if (letter == 'L'){ keyrow2[8] = 'c'}
+            if (letter == 'Z'){ keyrow3[0] = 'c';} if (letter == 'X'){ keyrow3[1] = 'c'}if (letter == 'C'){ keyrow3[2] = 'c'}if (letter == 'V'){ keyrow3[3] = 'c'}if (letter == 'B'){ keyrow3[4] = 'c'}if (letter == 'N'){ keyrow3[5] = 'c'}if (letter == 'M'){ keyrow3[6] = 'c'}
           } else {
             let verifynext = false;
             let j = 0;
@@ -525,20 +527,20 @@
             }
             if ((yellowletter.includes(letter) && countchar(word,letter) == 1 ) || (countchar(word,letter) == 1 && word.includes(letter) && verifynext)){
               returnlist.push('f');
-              if (letter == 'Q'){ keyrow1[0] = 'found';} if (letter == 'W'){ keyrow1[1] = 'found'}if (letter == 'E'){ keyrow1[2] = 'found'}if (letter == 'R'){ keyrow1[3] = 'found'}if (letter == 'T'){ keyrow1[4] = 'found'}if (letter == 'Y'){ keyrow1[5] = 'found'}if (letter == 'U'){ keyrow1[6] = 'found'}if (letter == 'I'){ keyrow1[7] = 'found'}if (letter == 'O'){ keyrow1[8] = 'found'}if (letter == 'P'){ keyrow1[9] = 'found'}
-              if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
-              if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
+              if (letter == 'Q'){ keyrow1[0] = 'c';} if (letter == 'W'){ keyrow1[1] = 'c'}if (letter == 'E'){ keyrow1[2] = 'c'}if (letter == 'R'){ keyrow1[3] = 'c'}if (letter == 'T'){ keyrow1[4] = 'c'}if (letter == 'Y'){ keyrow1[5] = 'c'}if (letter == 'U'){ keyrow1[6] = 'c'}if (letter == 'I'){ keyrow1[7] = 'c'}if (letter == 'O'){ keyrow1[8] = 'c'}if (letter == 'P'){ keyrow1[9] = 'c'}
+              if (letter == 'A'){ keyrow2[0] = 'c';} if (letter == 'S'){ keyrow2[1] = 'c'}if (letter == 'D'){ keyrow2[2] = 'c'}if (letter == 'F'){ keyrow2[3] = 'c'}if (letter == 'G'){ keyrow2[4] = 'c'}if (letter == 'H'){ keyrow2[5] = 'c'}if (letter == 'J'){ keyrow2[6] = 'c'}if (letter == 'K'){ keyrow2[7] = 'c'}if (letter == 'L'){ keyrow2[8] = 'c'}
+              if (letter == 'Z'){ keyrow3[0] = 'c';} if (letter == 'X'){ keyrow3[1] = 'c'}if (letter == 'C'){ keyrow3[2] = 'c'}if (letter == 'V'){ keyrow3[3] = 'c'}if (letter == 'B'){ keyrow3[4] = 'c'}if (letter == 'N'){ keyrow3[5] = 'c'}if (letter == 'M'){ keyrow3[6] = 'c'}
             } else if (word.includes(letter)){
               returnlist.push('i');
-              if (letter == 'Q'){ keyrow1[0] = 'found';} if (letter == 'W'){ keyrow1[1] = 'found'}if (letter == 'E'){ keyrow1[2] = 'found'}if (letter == 'R'){ keyrow1[3] = 'found'}if (letter == 'T'){ keyrow1[4] = 'found'}if (letter == 'Y'){ keyrow1[5] = 'found'}if (letter == 'U'){ keyrow1[6] = 'found'}if (letter == 'I'){ keyrow1[7] = 'found'}if (letter == 'O'){ keyrow1[8] = 'found'}if (letter == 'P'){ keyrow1[9] = 'found'}
-              if (letter == 'A'){ keyrow2[0] = 'found';} if (letter == 'S'){ keyrow2[1] = 'found'}if (letter == 'D'){ keyrow2[2] = 'found'}if (letter == 'F'){ keyrow2[3] = 'found'}if (letter == 'G'){ keyrow2[4] = 'found'}if (letter == 'H'){ keyrow2[5] = 'found'}if (letter == 'J'){ keyrow2[6] = 'found'}if (letter == 'K'){ keyrow2[7] = 'found'}if (letter == 'L'){ keyrow2[8] = 'found'}
-              if (letter == 'Z'){ keyrow3[0] = 'found';} if (letter == 'X'){ keyrow3[1] = 'found'}if (letter == 'C'){ keyrow3[2] = 'found'}if (letter == 'V'){ keyrow3[3] = 'found'}if (letter == 'B'){ keyrow3[4] = 'found'}if (letter == 'N'){ keyrow3[5] = 'found'}if (letter == 'M'){ keyrow3[6] = 'found'}
+              if (letter == 'Q'){ keyrow1[0] = 'c';} if (letter == 'W'){ keyrow1[1] = 'c'}if (letter == 'E'){ keyrow1[2] = 'c'}if (letter == 'R'){ keyrow1[3] = 'c'}if (letter == 'T'){ keyrow1[4] = 'c'}if (letter == 'Y'){ keyrow1[5] = 'c'}if (letter == 'U'){ keyrow1[6] = 'c'}if (letter == 'I'){ keyrow1[7] = 'c'}if (letter == 'O'){ keyrow1[8] = 'c'}if (letter == 'P'){ keyrow1[9] = 'c'}
+              if (letter == 'A'){ keyrow2[0] = 'c';} if (letter == 'S'){ keyrow2[1] = 'c'}if (letter == 'D'){ keyrow2[2] = 'c'}if (letter == 'F'){ keyrow2[3] = 'c'}if (letter == 'G'){ keyrow2[4] = 'c'}if (letter == 'H'){ keyrow2[5] = 'c'}if (letter == 'J'){ keyrow2[6] = 'c'}if (letter == 'K'){ keyrow2[7] = 'c'}if (letter == 'L'){ keyrow2[8] = 'c'}
+              if (letter == 'Z'){ keyrow3[0] = 'c';} if (letter == 'X'){ keyrow3[1] = 'c'}if (letter == 'C'){ keyrow3[2] = 'c'}if (letter == 'V'){ keyrow3[3] = 'c'}if (letter == 'B'){ keyrow3[4] = 'c'}if (letter == 'N'){ keyrow3[5] = 'c'}if (letter == 'M'){ keyrow3[6] = 'c'}
               yellowletter.push(letter);
             } else {
               returnlist.push('f');
-              if (letter == 'Q'){ keyrow1[0] = 'false';} if (letter == 'W'){ keyrow1[1] = 'false'}if (letter == 'E'){ keyrow1[2] = 'false'}if (letter == 'R'){ keyrow1[3] = 'false'}if (letter == 'T'){ keyrow1[4] = 'false'}if (letter == 'Y'){ keyrow1[5] = 'false'}if (letter == 'U'){ keyrow1[6] = 'false'}if (letter == 'I'){ keyrow1[7] = 'false'}if (letter == 'O'){ keyrow1[8] = 'false'}if (letter == 'P'){ keyrow1[9] = 'false'}
-              if (letter == 'A'){ keyrow2[0] = 'false';} if (letter == 'S'){ keyrow2[1] = 'false'}if (letter == 'D'){ keyrow2[2] = 'false'}if (letter == 'F'){ keyrow2[3] = 'false'}if (letter == 'G'){ keyrow2[4] = 'false'}if (letter == 'H'){ keyrow2[5] = 'false'}if (letter == 'J'){ keyrow2[6] = 'false'}if (letter == 'K'){ keyrow2[7] = 'false'}if (letter == 'L'){ keyrow2[8] = 'false'}
-              if (letter == 'Z'){ keyrow3[0] = 'false';} if (letter == 'X'){ keyrow3[1] = 'false'}if (letter == 'C'){ keyrow3[2] = 'false'}if (letter == 'V'){ keyrow3[3] = 'false'}if (letter == 'B'){ keyrow3[4] = 'false'}if (letter == 'N'){ keyrow3[5] = 'false'}if (letter == 'M'){ keyrow3[6] = 'false'}
+              if (letter == 'Q'){ keyrow1[0] = 'f';} if (letter == 'W'){ keyrow1[1] = 'f'}if (letter == 'E'){ keyrow1[2] = 'f'}if (letter == 'R'){ keyrow1[3] = 'f'}if (letter == 'T'){ keyrow1[4] = 'f'}if (letter == 'Y'){ keyrow1[5] = 'f'}if (letter == 'U'){ keyrow1[6] = 'f'}if (letter == 'I'){ keyrow1[7] = 'f'}if (letter == 'O'){ keyrow1[8] = 'f'}if (letter == 'P'){ keyrow1[9] = 'f'}
+              if (letter == 'A'){ keyrow2[0] = 'f';} if (letter == 'S'){ keyrow2[1] = 'f'}if (letter == 'D'){ keyrow2[2] = 'f'}if (letter == 'F'){ keyrow2[3] = 'f'}if (letter == 'G'){ keyrow2[4] = 'f'}if (letter == 'H'){ keyrow2[5] = 'f'}if (letter == 'J'){ keyrow2[6] = 'f'}if (letter == 'K'){ keyrow2[7] = 'f'}if (letter == 'L'){ keyrow2[8] = 'f'}
+              if (letter == 'Z'){ keyrow3[0] = 'f';} if (letter == 'X'){ keyrow3[1] = 'f'}if (letter == 'C'){ keyrow3[2] = 'f'}if (letter == 'V'){ keyrow3[3] = 'f'}if (letter == 'B'){ keyrow3[4] = 'f'}if (letter == 'N'){ keyrow3[5] = 'f'}if (letter == 'M'){ keyrow3[6] = 'f'}
             }
           }
           i +=1 ;
@@ -556,8 +558,7 @@
         if (notif){
           console.log('you got it');
           ctx.fillStyle = 'rgb(255,255,255)';
-          ctx.fillText('YOU GOT IT!', 50, window.innerHeight*3/5);
-          ctx.fillText('reload for another one', 50, window.innerHeight*4/5);
+          ctx.fillText('YOU GOT IT!', 50, window.innerHeight*6/10);
           localStorage.setItem('solution','solved!');
           localStorage.setItem('l1','done');
           localStorage.setItem('l2','done');
@@ -571,10 +572,14 @@
           localStorage.setItem('c4','done');
           localStorage.setItem('c5','done');
           localStorage.setItem('c6','done');
+          localStorage.setItem('keyrow1','done');
+          localStorage.setItem('keyrow2','done');
+          localStorage.setItem('keyrow3','done');
           localStorage.setItem('wins',String(parseInt(wins)+1));
-         
-          ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), 500, height*5/6);
-          ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))), 500, height*6/7);
+
+          //ctx.fillText('YOU GOT IT! Reload for another one.', width/10, window.innerHeight*6/10);
+          ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), width/10, height*8/10);
+          ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))),width/10, height*9/10);
 
         }
         return returnlist
@@ -608,11 +613,11 @@
         keys = ['Q','W','E','R','T','Y','U','I','O','P'];
         while (keycount < 10){
           //console.log(row1c);
-          if (row1c[keycount] == 'found'){
+          if (row1c[keycount] == 'c'){
             ctx.fillStyle = 'rgb(0,200,50)'
             ctx.fillRect(startw+eachsection*keycount,startw,keywidth,keyheight);
             ctx.fillStyle = 'rgb(255,255,255)'
-          } else if (row1c[keycount] == 'false'){
+          } else if (row1c[keycount] == 'f'){
             console.log('it is false....');
             ctx.fillStyle = 'rgb(0,0,0)'
             ctx.fillRect(startw+eachsection*keycount,startw,keywidth,keyheight);
@@ -629,11 +634,11 @@
         keycount = 0;
         keys = ['A','S','D','F','G','H','J','K','L'];
         while (keycount < 9){
-          if (row2c[keycount] == 'found'){
+          if (row2c[keycount] == 'c'){
             ctx.fillStyle = 'rgb(0,200,50)'
             ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight,keywidth,keyheight);
             ctx.fillStyle = 'rgb(255,255,255)'
-          } else if (row2c[keycount] == 'false'){
+          } else if (row2c[keycount] == 'f'){
             ctx.fillStyle = 'rgb(0,0,0)'
             ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight,keywidth,keyheight);
             ctx.fillStyle = 'rgb(125,125,125)'
@@ -649,11 +654,11 @@
         keycount = 0;
         keys = ['👍','Z','X','C','V','B','N','M','⏪'];
         while (keycount < 9){
-          if (row3c[keycount-1] == 'found' && keycount != 0 && keycount != 8){
+          if (row3c[keycount-1] == 'c' && keycount != 0 && keycount != 8){
             ctx.fillStyle = 'rgb(0,200,50)'
             ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight*2,keywidth,keyheight);
             ctx.fillStyle = 'rgb(255,255,255)'
-          } else if (row3c[keycount-1] == 'false' && keycount != 0 && keycount != 8){
+          } else if (row3c[keycount-1] == 'f' && keycount != 0 && keycount != 8){
             ctx.fillStyle = 'rgb(0,0,0)'
             ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight*2,keywidth,keyheight);
             ctx.fillStyle = 'rgb(125,125,125)'
@@ -711,7 +716,7 @@
                 console.log('got on last try');
               } else {
                 ctx.fillStyle = 'rgb(255,255,255)';
-                ctx.fillText('The word was '+solution, 500, height*4/5);
+                ctx.fillText('The word was '+solution, width/10, height*7/10);
                 localStorage.setItem('solution','solved!');
                 localStorage.setItem('l1','done');
                 localStorage.setItem('l2','done');
@@ -725,20 +730,23 @@
                 localStorage.setItem('c4','done');
                 localStorage.setItem('c5','done');
                 localStorage.setItem('c6','done');
+                localStorage.setItem('keyrow1','done');
+                localStorage.setItem('keyrow2','done');
+                localStorage.setItem('keyrow3','done');
                 localStorage.setItem('losses',String(parseInt(losses)+1));
-                
-                ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), 500, height*5/6);
-                ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))), 500, height*6/7);
               }
-            } else {
+              
+              ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), width/10, height*8/10);
+              ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))),width/10, height*9/10);
+           } else {
               ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
               ctx.fillText('Word not in word bank, but limiting off', 100, 200);
               currentline -= 1;
             }
             if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
               ctx.fillStyle = 'rgb(255,255,255)';
-              ctx.fillText('YOU GOT IT!', 500, 500);
               console.log('you got it');
+              localStorage.setItem('solution','solved!');
               localStorage.setItem('l1','done');
               localStorage.setItem('l2','done');
               localStorage.setItem('l3','done');
@@ -751,6 +759,9 @@
               localStorage.setItem('c4','done');
               localStorage.setItem('c5','done');
               localStorage.setItem('c6','done');
+              localStorage.setItem('keyrow1','done');
+              localStorage.setItem('keyrow2','done');
+              localStorage.setItem('keyrow3','done');
   
             }
             ctx.font = '70px Arial';
