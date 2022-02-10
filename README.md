@@ -8,7 +8,7 @@ An implementation of wordle in html canvas + js. Skparab1 daily wordle at https:
 
 - optimized refresh (only when typing)
 - word bank of 600 words
-- saves words and feedback
+- saves words and feedback and keyboard with webAPI
 - color feedback keyboard
 
 <img width="643" alt="Screen Shot 2022-02-09 at 9 01 47 PM" src="https://user-images.githubusercontent.com/71990977/153340518-e5f3de3a-82f7-4e20-ba97-854e476c8dc1.png">
