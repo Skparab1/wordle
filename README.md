@@ -11,6 +11,7 @@ skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle 
 - saves words and feedback
 
 - keyboard feedback
+- canvas auto sizer
 
 ## Need to do
 - save word
