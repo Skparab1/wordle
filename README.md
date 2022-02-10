@@ -23,4 +23,6 @@ An implementation of wordle in html canvas + js. Skparab1 daily wordle at https:
 - /wordle/random - a random wordle
 
 ## Why i made it
-- Wordle was bought by nyt so it will stop being public soon
+- Wordle was bought by nyt so it will stop being free soon
+- Kwong is doing a python version for java cs
+  - but wordle without graphics..... ew
