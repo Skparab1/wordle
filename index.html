@@ -547,6 +547,10 @@
           localStorage.setItem('c5','done');
           localStorage.setItem('c6','done');
           localStorage.setItem('wins',String(parseInt(wins)+1));
+         
+          ctx.fillText('Wins: '+localStorage.getItem('wins')+'   Losses: '+localStorage.getItem('losses'), 500, height*5/6);
+          ctx.fillText('Win percentage'+(parseInt(localStorage.getItem('wins'))/(parseInt(localStorage.getItem('wins'))+parseInt(localStorage.getItem('losses')))), 500, height*6/7);
+
         }
         return returnlist
       }
