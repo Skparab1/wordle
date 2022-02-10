@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skparab1 - Wordle</title>
+    <style>
+          body {background-color: rgb(0, 0, 0);}
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+
+      h1{
+        color:rgb(200, 200, 200);
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        background-color: #555555;
+      }
+      li {
+        display: inline;
+        float: left;
+      }
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      li a:hover {
+        background-color: #f78a41;
+      }
+
+      .center {
+        margin: auto;
+        width: 50%;
+        border: 3px solid green;
+        padding: 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><a href="https://skparab1.github.io/wordle">Home</a></li>
+      <li><a href="https://skparab1.github.io/wordle/random">Random</a></li>
+      <li><a href="https://skparab1.github.io/wordle/daily">Daily</a></li>
+    </ul> 
+
+    <h1>Skparab1 Wordle</h1>
+
+    <canvas class="myCanvas">
+      <p>Add suitable fallback here.</p>
+      <canvas id="the-canvas" width="320" height="240" style="position:relative; right:300px;"></canvas>
+    </canvas>
+
+    <script>
+
+      const canvas = document.querySelector('.myCanvas');
+      const width = canvas.width = window.innerWidth/2+window.innerWidth/4; 
+      const height = canvas.height = window.innerHeight;
+      canvas.style.left = "100px";
+      canvas.style.top = "100px";
+
+      let xcenter = window.innerWidth/2;
+      var activecanvas = [xcenter-xcenter/2,0,xcenter,window.innerHeight];
+      var totaluiwidth = xcenter/2
+      var oldline1 = [];
+      var lkey = '';
+      var checked = true;
+      var next = false;
+      var currentline = 1;
+
+      // reset toggle
+      // localStorage.setItem('c1','bbbbb');
+      // localStorage.setItem('c2','bbbbb');
+      // localStorage.setItem('c3','bbbbb');
+      // localStorage.setItem('c4','bbbbb');
+      // localStorage.setItem('c5','bbbbb');
+      // localStorage.setItem('c6','bbbbb');
+      
+
+      var wins = localStorage.getItem('win');
+      if (wins == null){
+        wins = 0;
+        localStorage.setItem('win','0');
+      }
+      wins = parseInt(wins);
+
+      var losses = localStorage.getItem('loss');
+      if (losses == null){
+        losses = 0;
+        localStorage.setItem('loss','0');
+      }
+      losses = parseInt(losses);
+
+      var line1 = localStorage.getItem('l1');
+      if (line1 == null || line1 == 'done'){
+        line1 = [];
+      } else {
+        line1 = makelist(line1);
+      }
+
+      var line1 = localStorage.getItem('l1');
+      if (line1 == null || line1 == 'done'){
+        line1 = [];
+      } else {
+        line1 = makelist(line1);
+      }
+
+      var line2 = localStorage.getItem('l2');
+      if (line2 == null || line2 == 'done'){
+        line2 = [];
+      } else {
+        line2 = makelist(line2);
+      }
+
+      var line3 = localStorage.getItem('l3');
+      if (line3 == null || line3 == 'done'){
+        line3 = [];
+      } else {
+        line3 = makelist(line3);
+      }
+
+      var line4 = localStorage.getItem('l4');
+      if (line4 == null || line4 == 'done'){
+        line4 = [];
+      } else {
+        line4 = makelist(line4);
+      }
+
+      var line5 = localStorage.getItem('l5');
+      if (line5 == null || line5 == 'done'){
+        line5 = [];
+      } else {
+        line5 = makelist(line5);
+      }
+
+      var line6 = localStorage.getItem('l6');
+      if (line6 == null || line6 == 'done'){
+        line6 = [];
+      } else {
+        line6 = makelist(line6);
+      }
+
+      var colors1 = localStorage.getItem('c1');
+      if (colors1 == null || colors1 == 'done'){
+        colors1 = ['b','b','b','b','b'];
+        localStorage.setItem('c1',makestring(colors1));
+      } else {
+        colors1 = makelist(colors1);
+      }
+
+      console.log('tryl',colors1);
+      if (line1.length >= 5 && !arraysequal(['b','b','b','b','b'],colors1)){
+        currentline = 2;
+      }
+      
+      var colors2 = localStorage.getItem('c2');
+      if (colors2 == null || colors2 == 'done'){
+        colors2 = ['b','b','b','b','b'];
+        localStorage.setItem('c2',makestring(colors2));
+      } else {
+        colors2 = makelist(colors2);
+      }
+
+      if (line2.length >= 5 && !arraysequal(['b','b','b','b','b'],colors2)){
+        currentline = 3;
+      }
+
+      var colors3 = localStorage.getItem('c3');
+      if (colors3 == null || colors3 == 'done'){
+        colors3 = ['b','b','b','b','b'];
+        localStorage.setItem('c3',makestring(colors3));
+      } else {
+        colors3 = makelist(colors3);
+      }
+
+      console.log('first',line3,colors3);
+
+      if (line3.length >= 5 && !arraysequal(['b','b','b','b','b'],colors3)){
+        currentline = 4;
+      }
+      
+      var colors4 = localStorage.getItem('c4');
+      if (colors4 == null || colors4 == 'done'){
+        colors4 = ['b','b','b','b','b'];
+        localStorage.setItem('c4',makestring(colors4));
+      } else {
+        colors4 = makelist(colors4);
+      }
+
+      if (line4.length >= 5 && !arraysequal(['b','b','b','b','b'],colors4)){
+        currentline = 5;
+      }
+      var colors5 = localStorage.getItem('c5');
+      if (colors5 == null || colors5 == 'done'){
+        colors5 = ['b','b','b','b','b'];
+        localStorage.setItem('c5',makestring(colors5));
+      } else {
+        colors5 = makelist(colors5);
+      }
+
+      if (line5.length >= 5 && !arraysequal(['b','b','b','b','b'],colors5)){
+        currentline = 6;
+      }
+      var colors6 = localStorage.getItem('c6');
+      if (colors6 == null || colors6 == 'done'){
+        colors6 = ['b','b','b','b','b'];
+        localStorage.setItem('c6',makestring(colors6));
+      } else {
+        colors6 = makelist(colors6);
+      }
+
+      var keyrow1 = localStorage.getItem('keyrow1');
+      if (keyrow1 == null || keyrow1 == 'done'){
+        keyrow1 = ['-','-','-','-','-','-','-','-','-','-'];
+        localStorage.setItem('keyrow1',makestring(keyrow1));
+      } else {
+        keyrow1 = makelist(keyrow1);
+      }
+      var keyrow2 = localStorage.getItem('keyrow2');
+      if (keyrow2 == null || keyrow2 == 'done'){
+        keyrow2 = ['-','-','-','-','-','-','-','-','-','-'];
+        localStorage.setItem('keyrow2',makestring(keyrow2));
+      } else {
+        keyrow2 = makelist(keyrow2);
+      }
+      var keyrow3 = localStorage.getItem('keyrow3');
+      if (keyrow3 == null || keyrow3 == 'done'){
+        keyrow3 = ['-','-','-','-','-','-','-','-','-','-'];
+        localStorage.setItem('keyrow3',makestring(keyrow3));
+      } else {
+        keyrow3 = makelist(keyrow3);
+      }
+
+      console.log('it',keyrow1,keyrow2,keyrow3);
+
+      drawkeyboard(colors1,keyrow1,keyrow2,keyrow3);
+
+      var sltn = localStorage.getItem('solution');
+      var filterwordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU','HELLO','MAGIC','HUMAN','PIANO','ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BEACH', 'BLOCK', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'CHAIN', 'CHAIR', 'CHIEF', 'CHILD', 'CLOCK', 'COACH', 'COAST', 'COURT', 'CRIME', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEPTH', 'DOUBT', 'DRAMA', 'DREAM', 'DRESS', 'DRIVE', 'EARTH', 'EVENT', 'FAULT', 'FIELD', 'FLOOR', 'FRUIT', 'GLASS', 'GRASS', 'GREEN', 'HEART', 'HORSE', 'HOTEL', 'HOUSE', 'JUDGE', 'LEVEL', 'LIGHT', 'LUNCH', 'm', 'METAL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NORTH', 'PANEL', 'PAPER', 'PHONE', 'PILOT', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'QUEEN', 'RADIO', 'RANGE', 'RIVER', 'SCENE', 'SCORE', 'SHAPE', 'SHARE', 'SHEEP', 'SLEEP', 'SMILE', 'SMOKE', 'SPACE', 'SPORT', 'START', 'STATE', 'STEEL', 'STONE', 'SUGAR', 'TOWER', 'TRACK', 'TRAIN', 'TRIAL', 'VALUE', 'VIDEO', 'WATER', 'WHITE', 'WORLD'];
+      var wordbank = ['APPLE','PLANE','TRAIN','SHRUG','PEARS','BOXES','CARRY','ENTER','FIRST','SHORT','SHARK','ADIEU', 'HAVOC', 'HELLO', 'MAGIC', 'HUMAN', 'PIANO', 'ABUSE', 'ADULT', 'AGENT', 'ANGER', 'APPLE', 'AWARD', 'BASIS', 'BEACH', 'BIRTH', 'BLOCK', 'BLOOD', 'BOARD', 'BRAIN', 'BREAD', 'BREAK', 'BROWN', 'BUYER', 'CAUSE', 'CHAIN', 'CHAIR', 'CHEST', 'CHIEF', 'CHILD', 'CHINA', 'CLAIM', 'CLASS', 'CLOCK', 'COACH', 'COAST', 'COURT', 'COVER', 'CREAM', 'CRIME', 'CROSS', 'CROWD', 'CROWN', 'CYCLE', 'DANCE', 'DEATH', 'DEPTH', 'DOUBT', 'DRAFT', 'DRAMA', 'DREAM', 'DRESS', 'DRINK', 'DRIVE', 'EARTH', 'ENEMY', 'ENTRY', 'ERROR', 'EVENT', 'FAITH', 'FAULT', 'FIELD', 'FIGHT', 'FINAL', 'FLOOR', 'FOCUS', 'FORCE', 'FRAME', 'FRANK', 'FRONT', 'FRUIT', 'GLASS', 'GRANT', 'GRASS', 'GREEN', 'GROUP', 'GUIDE', 'HEART', 'HENRY', 'HORSE', 'HOTEL', 'HOUSE', 'IMAGE', 'INDEX', 'INPUT', 'ISSUE', 'JAPAN', 'JONES', 'JUDGE', 'KNIFE', 'LAURA', 'LAYER', 'LEVEL', 'LEWIS', 'LIGHT', 'LIMIT', 'LUNCH', 'MAJOR', 'MARCH', 'm', 'METAL', 'MODEL', 'MONEY', 'MONTH', 'MOTOR', 'MOUTH', 'MUSIC', 'NIGHT', 'NOISE', 'NORTH', 'NOVEL', 'NURSE', 'OFFER', 'ORDER', 'OTHER', 'OWNER', 'PANEL', 'PAPER', 'PARTY', 'PEACE', 'PETER', 'PHASE', 'PHONE', 'PIECE', 'PILOT', 'PITCH', 'PLACE', 'PLANE', 'PLANT', 'PLATE', 'POINT', 'POUND', 'POWER', 'PRESS', 'PRICE', 'PRIDE', 'PRIZE', 'PROOF', 'QUEEN', 'RADIO', 'RANGE', 'RATIO', 'REPLY', 'RIGHT', 'RIVER', 'ROUND', 'ROUTE', 'RUGBY', 'SCALE', 'SCENE', 'SCOPE', 'SCORE', 'SENSE', 'SHAPE', 'SHARE', 'SHEEP', 'SHEET', 'SHIFT', 'SHIRT', 'SHOCK', 'SIGHT', 'SIMON', 'SKILL', 'SLEEP', 'SMILE', 'SMITH', 'SMOKE', 'SOUND', 'SOUTH', 'SPACE', 'SPEED', 'SPITE', 'SPORT', 'SQUAD', 'STAFF', 'STAGE', 'START', 'STATE', 'STEAM', 'STEEL', 'STOCK', 'STONE', 'STORE', 'STUDY', 'STUFF', 'STYLE', 'SUGAR', 'TABLE', 'TASTE', 'TERRY', 'THEME', 'THING', 'TITLE', 'TOTAL', 'TOUCH', 'TOWER', 'TRACK', 'TRADE', 'TRAIN', 'TREND', 'TRIAL', 'TRUST', 'TRUTH', 'UNCLE', 'UNION', 'UNITY', 'VALUE', 'VIDEO', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WATER', 'WHILE', 'WHITE', 'WHOLE', 'WOMAN', 'WORLD', 'YOUTH', '', '5LETTERPRONOUNS', '', 'ALCON', 'AUGHT', 'HELLA', 'ONE’S', 'OUGHT', 'THAME', 'THERE', 'THINE', 'THINE', 'WHERE', 'WHICH', 'WHOSE', 'WHOSO', 'YOURS', 'YOURS', '', '5LETTERVERBS', '', 'ADMIT', 'ADOPT', 'AGREE', 'ALLOW', 'ALTER', 'APPLY', 'ARGUE', 'ARISE', 'AVOID', 'BEGIN', 'BLAME', 'BREAK', 'BRING', 'BUILD', 'BURST', 'CARRY', 'CATCH', 'CAUSE', 'CHECK', 'CLAIM', 'CLEAN', 'CLEAR', 'CLIMB', 'CLOSE', 'COUNT', 'COVER', 'CROSS', 'DANCE', 'DOUBT', 'DRINK', 'DRIVE', 'ENJOY', 'ENTER', 'EXIST', 'FIGHT', 'FOCUS', 'FORCE', 'GUESS', 'IMPLY', 'ISSUE', 'JUDGE', 'LAUGH', 'LEARN', 'LEAVE', 'LET’S', 'LIMIT', 'MARRY', 'm', 'OCCUR', 'OFFER', 'ORDER', 'PHONE', 'PLACE', 'POINT', 'PRESS', 'PROVE', 'RAISE', 'REACH', 'REFER', 'RELAX', 'SERVE', 'SHALL', 'SHARE', 'SHIFT', 'SHOOT', 'SLEEP', 'SOLVE', 'SOUND', 'SPEAK', 'SPEND', 'SPLIT', 'STAND', 'START', 'STATE', 'STICK', 'STUDY', 'TEACH', 'THANK', 'THINK', 'THROW', 'TOUCH', 'TRAIN', 'TREAT', 'TRUST', 'VISIT', 'VOICE', 'WASTE', 'WATCH', 'WORRY', 'WOULD', 'WRITE', '', '5LETTERADJECTIVES', '', 'ABOVE', 'ACUTE', 'ALIVE', 'ALONE', 'ANGRY', 'AWARE', 'AWFUL', 'BASIC', 'BLACK', 'BLIND', 'BRAVE', 'BRIEF', 'BROAD', 'BROWN', 'CHEAP', 'CHIEF', 'CIVIL', 'CLEAN', 'CLEAR', 'CLOSE', 'CRAZY', 'DAILY', 'DIRTY', 'EARLY', 'EMPTY', 'EQUAL', 'EXACT', 'EXTRA', 'FAINT', 'FALSE', 'FIFTH', 'FINAL', 'FIRST', 'FRESH', 'FRONT', 'FUNNY', 'GIANT', 'GRAND', 'GREAT', 'GREEN', 'GROSS', 'HAPPY', 'HARSH', 'HEAVY', 'HUMAN', 'IDEAL', 'INNER', 'JOINT', 'LARGE', 'LEGAL', 'LEVEL', 'LIGHT', 'LOCAL', 'LOOSE', 'LUCKY', 'MAGIC', 'MAJOR', 'MINOR', 'MORAL', 'NAKED', 'NASTY', 'NAVAL', 'OTHER', 'OUTER', 'PLAIN', 'PRIME', 'PRIOR', 'PROUD', 'QUICK', 'QUIET', 'RAPID', 'READY', 'RIGHT', 'ROMAN', 'ROUGH', 'ROUND', 'ROYAL', 'RURAL', 'SHARP', 'SHEER', 'SHORT', 'SILLY', 'SIXTH', 'SMALL', 'SMART', 'SOLID', 'SORRY', 'SPARE', 'STEEP', 'STILL', 'SUPER', 'SWEET', 'THICK', 'THIRD', 'TIGHT', 'TOTAL', 'TOUGH', 'UPPER', 'UPSET', 'URBAN', 'USUAL', 'VAGUE', 'VALID', 'VITAL', 'WHITE', 'WHOLE', 'WRONG', 'YOUNG', '', '5LETTERCONJUNCTIONS', '', 'AFORE', 'AFTER', 'BOTHE', 'OTHER', 'SINCE', 'SLASH', 'UNTIL', 'WHERE', 'WHILE', '', '5LETTERADVERBS', '', 'ABACK', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ACCEL', 'ADOWN', 'AFOOT', 'AFORE', 'AFOUL', 'AFTER', 'AGAIN', 'AGAPE', 'AGOGO', 'AGONE', 'AHEAD', 'AHULL', 'ALIFE', 'ALIKE', 'ALINE', 'ALOFT', 'ALONE', 'ALONG', 'ALOOF', 'ALOUD', 'AMISS', 'AMPLY', 'AMUCK', 'APACE', 'APART', 'APTLY', 'AREAR', 'ASIDE', 'ASKEW', 'AWFUL', 'BADLY', 'BALLY', 'BELOW', 'CANNY', 'CHEAP', 'CLEAN', 'CLEAR', 'COYLY', 'DAILY', 'DIMLY', 'DIRTY', 'DITTO', 'DRILY', 'DRYLY', 'DULLY', 'EARLY', 'EXTRA', 'FALSE', 'FATLY', 'FEYLY', 'FIRST', 'FITLY', 'FORTE', 'FORTH', 'FRESH', 'FULLY', 'FUNNY', 'GAILY', 'GAYLY', 'GODLY', 'GREAT', 'HAPLY', 'HEAVY', 'HELLA', 'HENCE', 'HOTLY', 'ICILY', 'INFRA', 'INTL.', 'JILDI', 'JOLLY', 'LAXLY', 'LENTO', 'LIGHT', 'LOWLY', 'MADLY', 'MAYBE', 'NEVER', 'NEWLY', 'NOBLY', 'ODDLY', 'OFTEN', 'OTHER', 'OUGHT', 'PARTY', 'PIANO', 'PLAIN', 'PLONK', 'PLUMB', 'PRIOR', 'QUEER', 'QUICK', 'QUITE', 'RAMEN', 'RAPID', 'REDLY', 'RIGHT', 'ROUGH', 'ROUND', 'SADLY', 'SECUS', 'SELLY', 'SHARP', 'SHEER', 'SHILY', 'SHORT', 'SHYLY', 'SILLY', 'SINCE', 'SLEEK', 'SLYLY', 'SMALL', 'SO-SO', 'SOUND', 'SPANG', 'SRSLY', 'STARK', 'STILL', 'STONE', 'STOUR', 'SUPER', 'TALLY', 'TANTO', 'THERE', 'THICK', 'TIGHT', 'TODAY', 'TOMOZ', 'TRULY', 'TWICE', 'UNDER', 'UTTER', 'VERRY', 'WANLY', 'WETLY', 'WHERE', 'WRONG', 'WRYLY', '', '5LETTERPREPOSITIONS', '', 'ABAFT', 'ABOON', 'ABOUT', 'ABOVE', 'ADOWN', 'AFORE', 'AFTER', 'ALONG', 'ALOOF', 'AMONG', 'BELOW', 'CIRCA', 'CROSS', 'FURTH', 'MINUS', 'NEATH', 'ROUND', 'SINCE', 'SPITE', 'UNDER', 'UNTIL', '', '5LETTERINTERJECTIONS', '', 'AARGH', 'ADIEU', 'ADIOS', 'ALACK', 'ALOHA', 'AVAST', 'BAKAW', 'BASTA', 'BEGAD', 'BLESS', 'BLIGE', 'BRAVA', 'BRAVO', 'BRING', 'CHOOK', 'DAMME', 'DILDO', 'DITTO', 'FRICK', 'FUDGE', 'GOLLY', 'GRATZ', 'HALLO', 'HASTA', 'HAVOC', 'HELLA', 'HELLO', 'HOWAY', 'HOWDY', 'HULLO', 'HUZZA', 'JESUS', 'KAPOW', 'LOOSE', 'LORDY', 'MARRY', 'MERCY', 'NIGHT', 'PLONK', 'PSYCH', 'QUITE', 'SALVE', 'SKOAL', 'SNIFF', 'SOOEY', 'THERE', 'THIAM', 'THWAP', 'TOUGH', 'TWIRP', 'VIOLA', 'VIVAT', 'WACKO', 'WAHEY', 'WHIST', 'WILMA', 'WIRRA', 'WOOPS', 'WOWIE', 'YECCH', 'YEEHA', 'YEESH', 'YOWCH', 'ZOWIE', 'DONE'];
+      var solution;
+      var loc = window.location.href;
+      console.log(loc);
+      if (loc == 'https://skparab1.github.io/wordle/' || loc == 'https://skparab1.github.io/wordle/'){
+        solution = 'CLOCK';
+      } else if (sltn != null && sltn != 'solved!'){
+        solution = sltn;
+      } else {
+        solution = filterwordbank[Math.floor(Math.random()*filterwordbank.length)];
+        localStorage.setItem('solution',solution);
+      }
+
+      const ctx = canvas.getContext('2d');
+      //canvas.getMousePosition
+      ctx.fillStyle = 'rgb(125,125,125)';
+      //ctx.fillRect(activecanvas[0], activecanvas[1], activecanvas[2], activecanvas[3]);
+      ctx.strokeStyle = 'rgb(255,255,255)';
+
+      let h = height/1000;
+      let ct = 0
+      var renderheight = 2*height/18;
+      var actnumber = 0
+      var scalefactor = width/1024;
+      drawkeyboard(colors1, keyrow1, keyrow2, keyrow3);
+
+      txtsize = scalefactor*35;
+      ctx.font = txtsize+'px Arial';
+      while (ct < 6){
+        let i = 27;
+        while (i >= -17){
+          ctx.fillStyle = 'rgb(255,255,255)';
+          ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));
+          if (line1[actnumber-5]){
+            ctx.fillText(line1[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
+          }
+          if (line2[actnumber-5]){
+            ctx.fillText(line2[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 2*window.innerHeight/18 + 35*scalefactor);
+          }
+          if (line3[actnumber-5]){
+            ctx.fillText(line3[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 4*window.innerHeight/18 + 35*scalefactor);
+          }  
+          if (line4[actnumber-5]){
+            ctx.fillText(line4[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 6*window.innerHeight/18 + 35*scalefactor);
+          }  
+          if (line5[actnumber-5]){
+            ctx.fillText(line5[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 8*window.innerHeight/18 + 35*scalefactor);
+          }  
+          if (line6[actnumber-5]){
+            ctx.fillText(line6[actnumber-5],  xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 10*window.innerHeight/18 + 35*scalefactor);
+          }  
+        
+          if (colors1 != [] && !arraysequal(['b','b','b','b','b'],colors1) && ct == 0){
+            if (colors1[actnumber] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors1[actnumber] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors1[actnumber] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors1[actnumber] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));    
+          }
+          
+          if (colors2 != [] && !arraysequal(['b','b','b','b','b'],colors2) && ct == 1){
+            if (colors2[actnumber-5] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors2[actnumber-5] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors2[actnumber-5] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors2[actnumber-5] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          console.log('second',colors3,line3,actnumber);
+
+          if (colors3 != [] && !arraysequal(['b','b','b','b','b'],colors3) && ct == 2){
+            if (colors3[actnumber-10] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors3[actnumber-10] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors3[actnumber-10] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors3[actnumber-10] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          if (colors4 != [] && !arraysequal(['b','b','b','b','b'],colors4) && ct == 3){
+            if (colors4[actnumber-15] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors4[actnumber-15] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors4[actnumber-15] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors4[actnumber-15] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          if (colors5 != [] && !arraysequal(['b','b','b','b','b'],colors5) && ct == 4){
+            if (colors5[actnumber-20] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors5[actnumber-20] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors5[actnumber-20] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors5[actnumber-20] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          if (colors6 != [] && !arraysequal(['b','b','b','b','b'],colors6) && ct == 5){
+            if (colors6[actnumber-25] == 'b'){
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } 
+            if (colors6[actnumber-25] == 'm'){
+              ctx.fillStyle = 'rgb(0,200,0)';
+            } 
+            if (colors6[actnumber-25] == 'i'){
+              ctx.fillStyle = 'rgb(200,200,0)';
+            } 
+            if (colors6[actnumber-25] == 'f'){
+              ctx.fillStyle = 'rgb(200,0,0)';
+            }
+
+            ctx.strokeStyle = ctx.fillStyle;
+            ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+            ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));   
+          }
+
+          ctx.strokeStyle = 'rgb(255,255,255)';
+
+          if (line2[actnumber]){
+            //ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i,h+2*height/18);
+          }
+          //ctx.fillText(line1[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
+          //console.log(actnumber,erasev);
+          // if (actnumber == erasev){
+          //   console.log('erased');
+          //   ctx.fillStyle = 'rgb(0,0,0)';
+          //   ctx.fillText(eraseltr, xcenter-totaluiwidth/(2*27)*i+5*scalefactor,h+33*scalefactor);
+          //   ctx.fillStyle = 'rgb(255,255,255)';
+          // }
+
+          i -= 11
+          actnumber += 1;
+        }
+        h = h + 2*height/18;
+        ct += 1;
+      }
+
+      console.log(makestring(['i','a','d']));
+      console.log(makelist('hello'));
+
+      ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
+      ctx.font = '70px Arial';
+      //ctx.fillText(line1[0], 100, 100);
+
+      function degToRad(degrees) {
+        return degrees * Math.PI / 180;
+      };
+
+      function makestring(lst){
+        let i = 0;
+        let str = '';
+        while (i < lst.length){
+          str = str + lst[i];
+          i += 1;
+        }
+
+        return str
+      }
+
+      function makelist(str){
+        let i = 0;
+        let lst = [];
+        while (i < str.length){
+          lst.push(str.substring(i,i+1));
+          i += 1;
+        }
+
+        return lst
+      }
+
+      function truelength(lst){
+        let i = 0;
+        let count = 0;
+        while (i < lst.length){
+          if (lst[i] != ''){
+            count += 1;
+          }
+          i += 1;
+        }
+
+        return count
+      }
+
+      function countchar(str,char){
+        let i = 0;
+        let foundcount = 0;
+        while (i < str.length){
+          if (str[i] == char){
+            foundcount += 1;
+          }
+          i += 1;
+        }
+
+        return foundcount
+      }
+
+      function arraysequal(a, b) {
+        if (a === b) return true;
+        if (a == null || b == null) return false;
+        if (a.length !== b.length) return false;
+
+        for (var i = 0; i < a.length; ++i) {
+          if (a[i] !== b[i]) return false;
+        }
+        return true;
+      }
+
+      function checkmatch(lst,word){
+        var returnlist = []
+        let i = 0;
+        console.log(lst,word);
+        let yellowletter = [];
+
+        while (i < 5){
+          let letter = lst[i];
+          console.log(letter,lst[i]);
+          if (word.includes(letter) && letter == word.substring(i,i+1)){
+            returnlist.push('m')
+            if (letter == 'Q'){ keyrow1[0] = 'c';} if (letter == 'W'){ keyrow1[1] = 'c'}if (letter == 'E'){ keyrow1[2] = 'c'}if (letter == 'R'){ keyrow1[3] = 'c'}if (letter == 'T'){ keyrow1[4] = 'c'}if (letter == 'Y'){ keyrow1[5] = 'c'}if (letter == 'U'){ keyrow1[6] = 'c'}if (letter == 'I'){ keyrow1[7] = 'c'}if (letter == 'O'){ keyrow1[8] = 'c'}if (letter == 'P'){ keyrow1[9] = 'c'}
+            if (letter == 'A'){ keyrow2[0] = 'c';} if (letter == 'S'){ keyrow2[1] = 'c'}if (letter == 'D'){ keyrow2[2] = 'c'}if (letter == 'F'){ keyrow2[3] = 'c'}if (letter == 'G'){ keyrow2[4] = 'c'}if (letter == 'H'){ keyrow2[5] = 'c'}if (letter == 'J'){ keyrow2[6] = 'c'}if (letter == 'K'){ keyrow2[7] = 'c'}if (letter == 'L'){ keyrow2[8] = 'c'}
+            if (letter == 'Z'){ keyrow3[0] = 'c';} if (letter == 'X'){ keyrow3[1] = 'c'}if (letter == 'C'){ keyrow3[2] = 'c'}if (letter == 'V'){ keyrow3[3] = 'c'}if (letter == 'B'){ keyrow3[4] = 'c'}if (letter == 'N'){ keyrow3[5] = 'c'}if (letter == 'M'){ keyrow3[6] = 'c'}
+          } else {
+            let verifynext = false;
+            let j = 0;
+            while(j < 5){
+              if (word.substring(i,i+1) == letter && letter == lst[j]){
+                verifynext = true;
+              }
+              j += 1;
+            }
+            if ((yellowletter.includes(letter) && countchar(word,letter) == 1 ) || (countchar(word,letter) == 1 && word.includes(letter) && verifynext)){
+              returnlist.push('f');
+              if (letter == 'Q'){ keyrow1[0] = 'c';} if (letter == 'W'){ keyrow1[1] = 'c'}if (letter == 'E'){ keyrow1[2] = 'c'}if (letter == 'R'){ keyrow1[3] = 'c'}if (letter == 'T'){ keyrow1[4] = 'c'}if (letter == 'Y'){ keyrow1[5] = 'c'}if (letter == 'U'){ keyrow1[6] = 'c'}if (letter == 'I'){ keyrow1[7] = 'c'}if (letter == 'O'){ keyrow1[8] = 'c'}if (letter == 'P'){ keyrow1[9] = 'c'}
+              if (letter == 'A'){ keyrow2[0] = 'c';} if (letter == 'S'){ keyrow2[1] = 'c'}if (letter == 'D'){ keyrow2[2] = 'c'}if (letter == 'F'){ keyrow2[3] = 'c'}if (letter == 'G'){ keyrow2[4] = 'c'}if (letter == 'H'){ keyrow2[5] = 'c'}if (letter == 'J'){ keyrow2[6] = 'c'}if (letter == 'K'){ keyrow2[7] = 'c'}if (letter == 'L'){ keyrow2[8] = 'c'}
+              if (letter == 'Z'){ keyrow3[0] = 'c';} if (letter == 'X'){ keyrow3[1] = 'c'}if (letter == 'C'){ keyrow3[2] = 'c'}if (letter == 'V'){ keyrow3[3] = 'c'}if (letter == 'B'){ keyrow3[4] = 'c'}if (letter == 'N'){ keyrow3[5] = 'c'}if (letter == 'M'){ keyrow3[6] = 'c'}
+            } else if (word.includes(letter)){
+              returnlist.push('i');
+              if (letter == 'Q'){ keyrow1[0] = 'c';} if (letter == 'W'){ keyrow1[1] = 'c'}if (letter == 'E'){ keyrow1[2] = 'c'}if (letter == 'R'){ keyrow1[3] = 'c'}if (letter == 'T'){ keyrow1[4] = 'c'}if (letter == 'Y'){ keyrow1[5] = 'c'}if (letter == 'U'){ keyrow1[6] = 'c'}if (letter == 'I'){ keyrow1[7] = 'c'}if (letter == 'O'){ keyrow1[8] = 'c'}if (letter == 'P'){ keyrow1[9] = 'c'}
+              if (letter == 'A'){ keyrow2[0] = 'c';} if (letter == 'S'){ keyrow2[1] = 'c'}if (letter == 'D'){ keyrow2[2] = 'c'}if (letter == 'F'){ keyrow2[3] = 'c'}if (letter == 'G'){ keyrow2[4] = 'c'}if (letter == 'H'){ keyrow2[5] = 'c'}if (letter == 'J'){ keyrow2[6] = 'c'}if (letter == 'K'){ keyrow2[7] = 'c'}if (letter == 'L'){ keyrow2[8] = 'c'}
+              if (letter == 'Z'){ keyrow3[0] = 'c';} if (letter == 'X'){ keyrow3[1] = 'c'}if (letter == 'C'){ keyrow3[2] = 'c'}if (letter == 'V'){ keyrow3[3] = 'c'}if (letter == 'B'){ keyrow3[4] = 'c'}if (letter == 'N'){ keyrow3[5] = 'c'}if (letter == 'M'){ keyrow3[6] = 'c'}
+              yellowletter.push(letter);
+            } else {
+              returnlist.push('f');
+              if (letter == 'Q'){ keyrow1[0] = 'f';} if (letter == 'W'){ keyrow1[1] = 'f'}if (letter == 'E'){ keyrow1[2] = 'f'}if (letter == 'R'){ keyrow1[3] = 'f'}if (letter == 'T'){ keyrow1[4] = 'f'}if (letter == 'Y'){ keyrow1[5] = 'f'}if (letter == 'U'){ keyrow1[6] = 'f'}if (letter == 'I'){ keyrow1[7] = 'f'}if (letter == 'O'){ keyrow1[8] = 'f'}if (letter == 'P'){ keyrow1[9] = 'f'}
+              if (letter == 'A'){ keyrow2[0] = 'f';} if (letter == 'S'){ keyrow2[1] = 'f'}if (letter == 'D'){ keyrow2[2] = 'f'}if (letter == 'F'){ keyrow2[3] = 'f'}if (letter == 'G'){ keyrow2[4] = 'f'}if (letter == 'H'){ keyrow2[5] = 'f'}if (letter == 'J'){ keyrow2[6] = 'f'}if (letter == 'K'){ keyrow2[7] = 'f'}if (letter == 'L'){ keyrow2[8] = 'f'}
+              if (letter == 'Z'){ keyrow3[0] = 'f';} if (letter == 'X'){ keyrow3[1] = 'f'}if (letter == 'C'){ keyrow3[2] = 'f'}if (letter == 'V'){ keyrow3[3] = 'f'}if (letter == 'B'){ keyrow3[4] = 'f'}if (letter == 'N'){ keyrow3[5] = 'f'}if (letter == 'M'){ keyrow3[6] = 'f'}
+            }
+          }
+          i +=1 ;
+        }
+        drawkeyboard(colors1, keyrow1, keyrow2, keyrow3);
+
+        localStorage.setItem('keyrow1',makestring(keyrow1));
+        localStorage.setItem('keyrow2',makestring(keyrow2));
+        localStorage.setItem('keyrow3',makestring(keyrow3));
+        
+        const ctx = canvas.getContext('2d');
+        var correctlist = ["m","m","m","m","m"];
+        console.log(correctlist, returnlist);
+        var notif = arraysequal(returnlist,correctlist);
+        if (notif){
+          console.log('you got it');
+          ctx.fillStyle = 'rgb(255,255,255)';
+          ctx.fillText('YOU GOT IT!', 50, window.innerHeight*6/10);
+          localStorage.setItem('solution','solved!');
+          localStorage.setItem('l1','done');
+          localStorage.setItem('l2','done');
+          localStorage.setItem('l3','done');
+          localStorage.setItem('l4','done');
+          localStorage.setItem('l5','done');
+          localStorage.setItem('l6','done');
+          localStorage.setItem('c1','done');
+          localStorage.setItem('c2','done');
+          localStorage.setItem('c3','done');
+          localStorage.setItem('c4','done');
+          localStorage.setItem('c5','done');
+          localStorage.setItem('c6','done');
+          localStorage.setItem('keyrow1','done');
+          localStorage.setItem('keyrow2','done');
+          localStorage.setItem('keyrow3','done');
+          localStorage.setItem('win',String(parseInt(wins)+1));
+
+          //ctx.fillText('YOU GOT IT! Reload for another one.', width/10, window.innerHeight*6/10);
+          ctx.fillText('Wins: '+localStorage.getItem('win')+'   Losses: '+localStorage.getItem('loss'), width/10, height*8/10);
+          ctx.fillText('Win percentage: '+((parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss'))))*100)+'%',width/10, height*9/10);
+
+        }
+        return returnlist
+      }
+
+      function drawkeyboard(letters,row1c,row2c,row3c){
+        const ctx = canvas.getContext('2d');
+        let scalefactor = window.innerWidth/1024;
+        let leftwidth = 3*window.innerWidth/8;
+        let keyboardmidpt = leftwidth/2;
+        let startw = keyboardmidpt/7;
+        let keybwidth = keyboardmidpt + keyboardmidpt-startw-startw;
+        let eachsection = keybwidth/10;
+        let keywidth = eachsection*9/10;
+        let keygap = eachsection*1/10;
+        let eachheight = keybwidth/9;
+        let keyheight = eachheight*9/10;
+        let gapy = eachheight*1/10;
+        let txtsize = scalefactor*25;
+
+        
+        // render keyboard box 
+        // theoretically we dont need these after the keys are done
+        // was mainly just for checking sizing
+        ctx.strokeStyle = 'rgb(255,255,255)'
+        //ctx.strokeRect(startw,startw,keybwidth,keybwidth/3);
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.font = txtsize+'px Arial';
+        
+        var keycount = 0;
+        keys = ['Q','W','E','R','T','Y','U','I','O','P'];
+        while (keycount < 10){
+          //console.log(row1c);
+          if (row1c[keycount] == 'c'){
+            ctx.fillStyle = 'rgb(0,200,50)'
+            ctx.fillRect(startw+eachsection*keycount,startw,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(255,255,255)'
+          } else if (row1c[keycount] == 'f'){
+            console.log('it is false....');
+            ctx.fillStyle = 'rgb(0,0,0)'
+            ctx.fillRect(startw+eachsection*keycount,startw,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(125,125,125)'
+          } else {
+            ctx.fillStyle = 'rgb(100,100,100)'
+            ctx.fillRect(startw+eachsection*keycount,startw,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(255,255,255)'
+          }
+          //ctx.strokeRect(startw+eachsection*keycount,startw,keywidth,keyheight);
+          ctx.fillText(keys[keycount],startw+eachsection*keycount+2*scalefactor,startw+25*scalefactor);
+          keycount += 1
+        }
+        keycount = 0;
+        keys = ['A','S','D','F','G','H','J','K','L'];
+        while (keycount < 9){
+          if (row2c[keycount] == 'c'){
+            ctx.fillStyle = 'rgb(0,200,50)'
+            ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(255,255,255)'
+          } else if (row2c[keycount] == 'f'){
+            ctx.fillStyle = 'rgb(0,0,0)'
+            ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(125,125,125)'
+          } else {
+            ctx.fillStyle = 'rgb(100,100,100)'
+            ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(255,255,255)'
+          } 
+          //ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight,keywidth,keyheight);
+          ctx.fillText(keys[keycount],startw+eachsection*keycount+4*scalefactor+eachsection/2,startw+eachheight+25*scalefactor);
+          keycount += 1
+        }
+        keycount = 0;
+        keys = ['👍','Z','X','C','V','B','N','M','⏪'];
+        while (keycount < 9){
+          if (row3c[keycount-1] == 'c' && keycount != 0 && keycount != 8){
+            ctx.fillStyle = 'rgb(0,200,50)'
+            ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight*2,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(255,255,255)'
+          } else if (row3c[keycount-1] == 'f' && keycount != 0 && keycount != 8){
+            ctx.fillStyle = 'rgb(0,0,0)'
+            ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight*2,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(125,125,125)'
+          } else {
+            ctx.fillStyle = 'rgb(100,100,100)'
+            ctx.fillRect(startw+eachsection*keycount+eachsection/2,startw+eachheight*2,keywidth,keyheight);
+            ctx.fillStyle = 'rgb(255,255,255)'
+          } 
+          //ctx.strokeRect(startw+eachsection*keycount+(eachsection/2),startw+eachheight*2,keywidth,keyheight);
+          ctx.fillText(keys[keycount],startw+eachsection*keycount+4*scalefactor+eachsection/2,startw+2*eachheight+25*scalefactor);
+          keycount += 1
+        }
+
+        ctx.fillStyle = 'rgb(255,255,255)'
+        ctx.font = '25px Arial';
+        //ctx.fillText('Q',startw+5,startw+25);
+        ctx.font = '35px Arial';
+      }
+
+      ctx.fillStyle = 'rgb('+200+', '+100+', '+0+')'
+      ctx.strokeStyle = 'rgb('+200+', '+100+', '+0+')'
+      ctx.font = '35px Arial';
+      window.addEventListener("keydown", function(event) {
+
+        if (event.defaultPrevented) {
+          return;
+        }
+
+        const ctx = canvas.getContext('2d');
+        
+        let actkey = event.code.replace('Key','')
+        let filterletters = 'QWERTYUIOPASDFGHJKLZXCVBNM';
+
+        if (actkey == 'Enter'){
+          if ((currentline == 1 && truelength(line1) >= 5) || (currentline == 2 && truelength(line2) >= 5) || (currentline == 3 && truelength(line3) >= 5) || (currentline == 4 && truelength(line4) >= 5) || (currentline == 5 && truelength(line5) >= 5) || (currentline == 6 && truelength(line6) >= 5)){
+            if (currentline == 1 ){ //&& wordbank.includes(line1[0]+line1[1]+line1[2]+line1[3]+line1[4])){
+              colors1 = checkmatch(line1,solution);
+              localStorage.setItem('c1',makestring(colors1));
+            } else if (currentline == 2 ){ //&& wordbank.includes(line2[0]+line2[1]+line2[2]+line2[3]+line2[4])){
+              colors2 = checkmatch(line2,solution);
+              localStorage.setItem('c2',makestring(colors2));
+            } else if (currentline == 3 ){ //&& wordbank.includes(line3[0]+line3[1]+line3[2]+line3[3]+line3[4])){
+              colors3 = checkmatch(line3,solution);
+              localStorage.setItem('c3',makestring(colors3));
+            } else if (currentline == 4 ){ //&& wordbank.includes(line4[0]+line4[1]+line4[2]+line4[3]+line4[4])){
+              colors4 = checkmatch(line4,solution);
+              localStorage.setItem('c4',makestring(colors4));
+            } else if (currentline == 5 ){ //&& wordbank.includes(line5[0]+line5[1]+line5[2]+line5[3]+line5[4])){
+              colors5 = checkmatch(line5,solution);
+              localStorage.setItem('c5',makestring(colors5));
+            } else if (currentline == 6 ){ //&& wordbank.includes(line6[0]+line6[1]+line6[2]+line6[3]+line6[4])){
+              colors6 = checkmatch(line6,solution);
+              localStorage.setItem('c6',makestring(colors6));
+              if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
+                console.log('got on last try');
+              } else {
+                ctx.fillStyle = 'rgb(255,255,255)';
+                ctx.fillText('The word was '+solution, width/10, height*7/10);
+                localStorage.setItem('solution','solved!');
+                localStorage.setItem('l1','done');
+                localStorage.setItem('l2','done');
+                localStorage.setItem('l3','done');
+                localStorage.setItem('l4','done');
+                localStorage.setItem('l5','done');
+                localStorage.setItem('l6','done');
+                localStorage.setItem('c1','done');
+                localStorage.setItem('c2','done');
+                localStorage.setItem('c3','done');
+                localStorage.setItem('c4','done');
+                localStorage.setItem('c5','done');
+                localStorage.setItem('c6','done');
+                localStorage.setItem('keyrow1','done');
+                localStorage.setItem('keyrow2','done');
+                localStorage.setItem('keyrow3','done');
+                localStorage.setItem('loss',String(parseInt(losses)+1));
+              }
+              
+              ctx.fillText('Wins: '+localStorage.getItem('win')+'   Losses: '+localStorage.getItem('loss'), width/10, height*8/10);
+              ctx.fillText('Win percentage: '+((parseInt(localStorage.getItem('win'))/(parseInt(localStorage.getItem('win'))+parseInt(localStorage.getItem('loss'))))*100)+'%',width/10, height*9/10);
+           } else {
+              ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+              ctx.fillText('Word not in word bank, but limiting off', 100, 200);
+              currentline -= 1;
+            }
+            if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
+              ctx.fillStyle = 'rgb(255,255,255)';
+              console.log('you got it');
+              localStorage.setItem('solution','solved!');
+              localStorage.setItem('l1','done');
+              localStorage.setItem('l2','done');
+              localStorage.setItem('l3','done');
+              localStorage.setItem('l4','done');
+              localStorage.setItem('l5','done');
+              localStorage.setItem('l6','done');
+              localStorage.setItem('c1','done');
+              localStorage.setItem('c2','done');
+              localStorage.setItem('c3','done');
+              localStorage.setItem('c4','done');
+              localStorage.setItem('c5','done');
+              localStorage.setItem('c6','done');
+              localStorage.setItem('keyrow1','done');
+              localStorage.setItem('keyrow2','done');
+              localStorage.setItem('keyrow3','done');
+  
+            }
+            ctx.font = '70px Arial';
+            ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
+            ctx.fillText('Too short height*3/5', 100, 400);
+            currentline += 1;
+          } else {
+            ctx.font = '70px Arial';
+            ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+            ctx.fillText('Too short', 100, height*3/5);
+          }
+          //ctx.fillText(colors1, 100, 100);
+        } else {
+          //ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
+          //ctx.fillText('Too short', 100, 100);
+        }
+
+        if ((currentline == 1 && truelength(line1) < 5) || (currentline == 2 && truelength(line2) < 5) || (currentline == 3 && truelength(line3) < 5) || (currentline == 4 && truelength(line4) < 5) || (currentline == 5 && truelength(line5) < 5) || (currentline == 6 && truelength(line6) < 5)){
+          checked = true;
+        } else {
+          checked = false;
+        }
+        
+        if (actkey != 'Backspace'){
+          if (filterletters.includes(actkey) && checked){
+            if (currentline == 1){
+              line1.push(actkey);
+              localStorage.setItem('l1',makestring(line1));
+            }
+            if (currentline == 2){
+              line2.push(actkey);
+              localStorage.setItem('l2',makestring(line2));
+            }
+            if (currentline == 3){
+              line3.push(actkey);
+              localStorage.setItem('l3',makestring(line3));
+            }
+            if (currentline == 4){
+              line4.push(actkey);
+              localStorage.setItem('l4',makestring(line4));
+            }
+            if (currentline == 5){
+              line5.push(actkey);
+              localStorage.setItem('l5',makestring(line5));
+            }
+            if (currentline == 6){
+              line6.push(actkey);
+              localStorage.setItem('l6',makestring(line6));
+            }
+            console.log('pushed',actkey);
+            lkey = actkey;
+            next = false;
+          }
+        } else {
+          var erasev;
+          //line1.pop('Backspace');
+          var eraseltr = lkey;
+          if (currentline == 1){
+            line1.pop(line1.length-1);
+            erasev = line1.length;
+            localStorage.setItem('l1',makestring(line1));
+          }           
+          if (currentline == 2){
+            line2.pop(line2.length-1);
+            erasev = line2.length;
+            localStorage.setItem('l2',makestring(line2));
+          }
+          if (currentline == 3){
+            line3.pop(line3.length-1);
+            erasev = line3.length;
+            localStorage.setItem('l3',makestring(line3));
+          }
+          if (currentline == 4){
+            line4.pop(line4.length-1);
+            erasev = line4.length;
+            localStorage.setItem('l4',makestring(line4));
+          }
+          if (currentline == 5){
+            line5.pop(line5.length-1);
+            erasev = line5.length;
+            localStorage.setItem('l5',makestring(line5));
+          }
+          if (currentline == 6){
+            line6.pop(line6.length-1);
+            erasev = line6.length;
+            localStorage.setItem('l6',makestring(line6));
+          }
+
+          console.log('backspaced, print',eraseltr)
+          //event.preventDefault();
+        }
+        console.log('current',currentline);
+
+        ctx.fillStyle = 'rgb(0,0,0)';
+        let line1sizer = (width/1024)*35;
+        let scalefactor = width/1024;
+        ctx.font = line1sizer+'px Arial';
+
+        let h = height/1000;
+        let ct = 0
+        var renderheight = 2*height/18;
+        var actnumber = 0;
+        var forcewrite = false;
+        //ctx.strokeRect(0,0,width,height);
+        ctx.fillStyle = 'rgb(255,255,255)';
+        //ctx.fillText(line1, 100,100);
+        while (ct < 6){
+          let i = 27;
+          let indexnum = 0;
+          while (i >= -17){
+            if ((colors1[indexnum] == 'b' && ct == 0) || (colors2[indexnum] == 'b' && ct == 1) || (colors3[indexnum] == 'b' && ct == 2) || (colors4[indexnum] == 'b' && ct == 3) || (colors5[indexnum] == 'b' && ct == 4) || (colors6[indexnum] == 'b' && ct == 5)){
+              ctx.strokeStyle = 'rgb(255,255,255)';
+              ctx.fillStyle = 'rgb(0,0,0)';
+            } else if ((colors1[indexnum] == 'm' && ct == 0) || (colors2[indexnum] == 'm' && ct == 1) || (colors3[indexnum] == 'm' && ct == 2) || (colors4[indexnum] == 'm' && ct == 3) || (colors5[indexnum] == 'm' && ct == 4) || (colors6[indexnum] == 'm' && ct == 5)){
+              ctx.strokeStyle = 'rgb(0,200,0)';
+              ctx.fillStyle = 'rgb(0,200,0)';
+              forcewrite = true;
+            } else if ((colors1[indexnum] == 'i' && ct == 0) || (colors2[indexnum] == 'i' && ct == 1) || (colors3[indexnum] == 'i' && ct == 2) || (colors4[indexnum] == 'i' && ct == 3) || (colors5[indexnum] == 'i' && ct == 4) || (colors6[indexnum] == 'i' && ct == 5)){
+              ctx.strokeStyle = 'rgb(200,200,0)';
+              ctx.fillStyle = 'rgb(200,200,0)';
+              forcewrite = true;
+            } else if ((colors1[indexnum] == 'f' && ct == 0) || (colors2[indexnum] == 'f' && ct == 1) || (colors3[indexnum] == 'f' && ct == 2) || (colors4[indexnum] == 'f' && ct == 3) || (colors5[indexnum] == 'f' && ct == 4) || (colors6[indexnum] == 'f' && ct == 5)){
+              ctx.strokeStyle = 'rgb(200,0,0)';
+              ctx.fillStyle = 'rgb(200,0,0)';
+              forcewrite = true;
+            } else {
+              ctx.strokeStyle = 'rgb(255,255,255)';
+              ctx.fillStyle = 'rgb(0,0,0)';
+            }
+
+            if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
+              ctx.fillStyle = 'rgb(255,255,255)';
+              ctx.fillText('YOU GOT IT!', 300, 100);
+              console.log('you got it');
+            }
+            
+            indexnum += 1;
+            if (colors1[indexnum] != 'b' && currentline == ct+2){
+              //ctx.delay(100);
+              ctx.strokeStyle = ctx.fillStyle;
+              //ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h+2*(currentline-1)*height/18,50*(width/1024),50*(width/1024));
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i,h+45*(width/1024),50*(width/1024),7*(width/1024));
+              ctx.strokeRect(xcenter-totaluiwidth/(2*27)*i,h,50*(width/1024),50*(width/1024));        
+            } else {
+              ctx.strokeStyle = 'rgb(0,0,0)';
+              //ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+2,h+45*(width/1024),50*(width/1024)-4,7*(width/1024));
+            }
+            ctx.fillStyle = 'rgb(255,255,255)';
+            ctx.strokeStyle = 'rgb(255,255,255)';
+
+            if (currentline != ct + 1 && indexnum == 5){
+              //break;
+            }
+            if (currentline == 1 && line1[actnumber]){
+              ctx.fillText(line1[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 35*scalefactor);
+            }
+            if (currentline == 2 && line2[actnumber] != undefined){
+              ctx.fillStyle = 'rgb(255,255,255)';
+              console.log(line2[actnumber]);
+              ctx.fillText(line2[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 2*window.innerHeight/18 + 35*scalefactor);
+            }
+            if (currentline == 3 && line3[actnumber] != undefined){
+              ctx.fillText(line3[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 4*window.innerHeight/18 + 35*scalefactor);
+              console.log(line3[actnumber]);
+            }
+            if (currentline == 4 && line4[actnumber] != undefined){
+              ctx.fillText(line4[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 6*window.innerHeight/18 + 35*scalefactor);
+              console.log(line4[actnumber]);
+            }
+            if (currentline == 5 && line5[actnumber] != undefined){
+              ctx.fillText(line5[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 8*window.innerHeight/18 + 35*scalefactor);
+              console.log(line5[actnumber]);
+            }
+            if (currentline == 6 && line6[actnumber] != undefined){
+              ctx.fillText(line6[actnumber], xcenter-totaluiwidth/(2*27)*i+5*scalefactor,window.innerHeight/200 + 10*window.innerHeight/18 + 35*scalefactor);
+              console.log(line6[actnumber]);
+            }
+            if (actnumber == erasev){
+              ctx.font = line1sizer+'px Arial';
+              console.log('erased');
+              ctx.fillStyle = 'rgb(0,0,0)';
+              ctx.fillRect(xcenter-totaluiwidth/(2*27)*i+1,h+2*(currentline-1)*height/18+1,50*(width/1024)-2,50*(width/1024)-2);
+              ctx.fillStyle = 'rgb(255,255,255)';
+            }
+            i -= 11
+            actnumber += 1;
+          }
+          forcewrite = false;
+          h = h + 2*height/18;
+          ct += 1;
+        }
+
+        if (line1.length % 5 == 0){
+          ctx.fillStyle = 'rgb(200,200,200)';
+          //ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,(h/10+2*height/18*(line1.length/5-1)),100*(width/1024),50*(width/1024));
+        } else {
+          ctx.fillStyle = 'rgb(0,0,0)';
+          //ctx.fillRect(xcenter+totaluiwidth/(2*27)*30,h,100*(width/1024),50*(width/1024));
+        }
+
+        //event.preventDefault();
+        }, true);
+
+      while (line1.includes('')){
+        line1.pop('');
+      }
+      oldline1 = line1;
+
+    </script>
+
+    <script type="text/javascript">
+
+      function getMousePosition(canvas, event) {
+          let rect = canvas.getBoundingClientRect();
+          let x = event.clientX - rect.left;
+          let y = event.clientY - rect.top;
+          console.log("Coordinate x: " + x, 
+                      "Coordinate y: " + y);
+          // these are clickables
+          if (x >= 110 && x <= 340 && y >= 180 && y <= 240){
+            //window.open('https://skparab1.github.io/login/auth=false&pwdchallenge=true&goto=skparab1.github.io&s&homepage',"_self")
+          }
+          if (x >= 388 && x <= 612 && y >= 180 && y <= 240){
+            //window.open('https://skparab1.github.io/search/&software=false&article=false',"_self")
+          }
+          // if (x >= 110 && x <= 340 && y >= 180 && y <= 240){
+          //   window.open('https://skparab1.github.io/login/auth=false&pwdchallenge=true&goto=skparab1.github.io&s&homepage',"_self")
+          // }
+      }
+
+      let canvasElem = document.querySelector("canvas");
+        
+      canvasElem.addEventListener("mousedown", function(e)
+      {
+          getMousePosition(canvasElem, e);
+      });
+    </script>
+    <h1 style="color:rgb(225, 252, 71);"></h1> Skparab1 Software</h1>
+    <h1 style="color:rgb(225, 252, 71);"></h1> hello</h1>
+    <h1 style="color:rgb(225, 252, 71);"> If you see this then you probably should reload so that the canvas auto resizes</h1>
+    <h1 style="color:rgb(225, 252, 71);"></h1> Skparab1 Software</h1>
+  </body>
+</html>
