@@ -1,5 +1,5 @@
 # wordle
-skparab1 wordle gui at https://skparab1.github.io/wordle
+skparab1 wordle gui at https://skparab1.github.io/wordle, random wordle at https://skparab1.github.io/wordle/random
 
 ## Main features
 - Colored frames
