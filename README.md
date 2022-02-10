@@ -1,5 +1,5 @@
 # wordle
-skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle at https://skparab1.github.io/wordle/random
+An implementation of wordle in html canvas + js. Skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle at https://skparab1.github.io/wordle/random
 
 ## Main features
 - Color graphics
@@ -15,3 +15,12 @@ skparab1 daily wordle at https://skparab1.github.io/wordle/daily, random wordle 
 
 - canvas auto sizer
 
+## Demo
+
+## Pages
+- /wordle - main test page, does the equivilant of daily
+- /wordle/daily - daily wordle
+- /wordle/random - a random wordle
+
+## Why i made it
+- Wordle was bought by nyt so it will stop being public soon
