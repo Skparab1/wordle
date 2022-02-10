@@ -251,7 +251,7 @@
       var loc = window.location.href;
       console.log(loc);
       if (loc == 'https://skparab1.github.io/wordle/' || loc == 'https://skparab1.github.io/wordle/daily'){
-        solution = 'BOOKS';
+        solution = 'PHONE';
       } else if (sltn != null && sltn != 'solved!'){
         solution = sltn;
       } else {
@@ -561,7 +561,7 @@
         if (notif){
           console.log('you got it');
           ctx.fillStyle = 'rgb(255,255,255)';
-          ctx.fillText('YOU GOT IT!', 50, window.innerHeight*6/10);
+          ctx.fillText('YOU GOT IT! Reload for another one', width/10, window.innerHeight*6/10);
           localStorage.setItem('solution','solved!');
           localStorage.setItem('l1','done');
           localStorage.setItem('l2','done');
@@ -769,12 +769,12 @@
             }
             ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+0+', '+0+', '+0+')'
-            ctx.fillText('Too short height*3/5', 100, 400);
+            ctx.fillText('Too short', width/10, height*3/5);
             currentline += 1;
           } else {
             ctx.font = '70px Arial';
             ctx.fillStyle = 'rgb('+255+', '+255+', '+255+')'
-            ctx.fillText('Too short', 100, height*3/5);
+            ctx.fillText('Too short', width/10, height*3/5);
           }
           //ctx.fillText(colors1, 100, 100);
         } else {
@@ -897,7 +897,7 @@
 
             if (colors1 == ['m','m','m','m','m'] || colors2 == ['m','m','m','m','m'] || colors3 == ['m','m','m','m','m'] || colors4 == ['m','m','m','m','m'] || colors5 == ['m','m','m','m','m'] || colors6 == ['m','m','m','m','m']){
               ctx.fillStyle = 'rgb(255,255,255)';
-              ctx.fillText('YOU GOT IT!', 300, 100);
+              ctx.fillText('YOU GOT IT! Reload for another one', 300, 100);
               console.log('you got it');
             }
             
